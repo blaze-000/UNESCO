@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify, send_file, Response
 from flask_cors import CORS
-from check_marketig.main import CheckMarketing
+from check_marketing.main import CheckMarketing
 import queue
 from threading import Thread
 import json

@@ -1,9 +1,9 @@
-from check_marketig.prompt_texts import *
-from check_marketig.structures import Claims, Articles, ClaimVerification
+from check_marketing.prompt_texts import *
+from check_marketing.structures import Claims, Articles, ClaimVerification
 from langchain_groq import ChatGroq
 from dotenv import load_dotenv
 from langchain.schema import Document
-from check_marketig.handel_search import google_search, deduplicate, get_from_url
+from check_marketing.handel_search import google_search, deduplicate, get_from_url
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain_community.vectorstores import FAISS
 from langchain_huggingface import HuggingFaceEmbeddings
