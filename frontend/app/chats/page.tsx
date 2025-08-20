@@ -294,18 +294,6 @@ export default function ChatsPage() {
                           {children}
                         </td>
                       ),
-                      code: ({ inline, children, ...props }) => (
-                        <code
-                          className={
-                            inline
-                              ? "bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm font-mono"
-                              : "block bg-gray-900 text-white p-3 rounded-md my-3 overflow-x-auto text-sm font-mono leading-relaxed"
-                          }
-                          {...props}
-                        >
-                          {children}
-                        </code>
-                      ),
                       pre: ({ children }) => (
                         <pre className="bg-gray-900 text-white p-3 rounded-md my-3 overflow-x-auto">
                           {children}
