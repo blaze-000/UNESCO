@@ -8,7 +8,9 @@ import {
   XCircle,
   Menu,
   X,
+  ArrowLeft,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 // Types
 interface QuizQuestion {
@@ -96,10 +98,10 @@ const modules: Module[] = [
 // Components
 function VideoPlayer({ content }: { content: string }) {
   return (
-    <div className="w-full">
+    <div className="w-full max-w-4xl mx-auto">
       <video
         controls
-        className="w-full rounded-lg bg-gray-900 min-h-[300px] md:min-h-[400px] object-contain"
+        className="w-full rounded-lg bg-gray-900 aspect-video object-contain shadow-lg"
         src={content}
       >
         Your browser does not support embedded videos.
@@ -117,7 +119,7 @@ function TextContent({ content }: { content: string }) {
         return (
           <h1
             key={index}
-            className="text-3xl font-bold text-gray-900 mt-8 mb-6 first:mt-0"
+            className="text-3xl font-bold text-foreground mt-8 mb-6 first:mt-0"
           >
             {trimmed.slice(2)}
           </h1>
@@ -127,7 +129,7 @@ function TextContent({ content }: { content: string }) {
         return (
           <h2
             key={index}
-            className="text-2xl font-semibold text-gray-900 mt-8 mb-4"
+            className="text-2xl font-semibold text-foreground mt-8 mb-4"
           >
             {trimmed.slice(3)}
           </h2>
@@ -135,7 +137,7 @@ function TextContent({ content }: { content: string }) {
       }
       if (trimmed.startsWith("**") && trimmed.endsWith("**")) {
         return (
-          <p key={index} className="font-semibold text-gray-900 mb-3 text-lg">
+          <p key={index} className="font-semibold text-foreground mb-3 text-lg">
             {trimmed.slice(2, -2)}
           </p>
         );
@@ -145,7 +147,10 @@ function TextContent({ content }: { content: string }) {
       }
 
       return (
-        <p key={index} className="text-gray-700 leading-relaxed mb-4 text-lg">
+        <p
+          key={index}
+          className="text-muted-foreground leading-relaxed mb-4 text-lg"
+        >
           {trimmed}
         </p>
       );
@@ -154,22 +159,24 @@ function TextContent({ content }: { content: string }) {
 
   return (
     <div className="max-w-4xl mx-auto">
-      <div className="prose prose-lg max-w-none overflow-y-auto">
-        {formatContent(content)}
-      </div>
+      <div className="prose prose-lg max-w-none">{formatContent(content)}</div>
     </div>
   );
 }
 
 function AudioPlayer({ title, content }: { title: string; content: string }) {
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <h2 className="text-xl font-semibold text-gray-900 mb-6">{title}</h2>
-      <div className="bg-gray-50 rounded-lg p-6">
-        <audio controls className="w-full">
-          <source src={content} />
-          Your browser does not support the audio element.
-        </audio>
+    <div className="max-w-4xl mx-auto">
+      <div className="bg-card rounded-xl shadow-sm border p-6">
+        <h2 className="text-xl font-semibold text-card-foreground mb-6">
+          {title}
+        </h2>
+        <div className="bg-muted rounded-lg p-6">
+          <audio controls className="w-full">
+            <source src={content} />
+            Your browser does not support the audio element.
+          </audio>
+        </div>
       </div>
     </div>
   );
@@ -195,225 +202,234 @@ function QuizComponent({
   }, [selectedAnswer, onComplete]);
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-gray-900">{title}</h2>
-        <p className="text-sm text-gray-500 mt-1">Practice Quiz • 1 question</p>
-      </div>
+    <div className="max-w-4xl mx-auto">
+      <div className="bg-card rounded-xl shadow-sm border p-6">
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold text-card-foreground">
+            {title}
+          </h2>
+          <p className="text-sm text-muted-foreground mt-1">
+            Practice Quiz • 1 question
+          </p>
+        </div>
 
-      <div className="space-y-6">
-        <h3 className="text-lg font-medium text-gray-900">
-          {question.question}
-        </h3>
+        <div className="space-y-6">
+          <h3 className="text-lg font-medium text-card-foreground">
+            {question.question}
+          </h3>
 
-        <div className="space-y-3">
-          {question.options.map((option, index) => {
-            let className =
-              "w-full p-4 text-left rounded-lg border border-gray-200 hover:border-gray-300 transition-all";
-            let icon = null;
+          <div className="space-y-3">
+            {question.options.map((option, index) => {
+              let className =
+                "w-full p-4 text-left rounded-lg border hover:border-muted-foreground/50 transition-all";
+              let icon = null;
 
-            if (selectedAnswer === index) {
-              if (index === question.correctAnswer) {
+              if (selectedAnswer === index) {
+                if (index === question.correctAnswer) {
+                  className =
+                    "w-full p-4 text-left rounded-lg border-2 border-green-500 bg-green-50";
+                  icon = (
+                    <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+                  );
+                } else {
+                  className =
+                    "w-full p-4 text-left rounded-lg border-2 border-red-500 bg-red-50";
+                  icon = (
+                    <XCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+                  );
+                }
+              } else if (
+                selectedAnswer !== null &&
+                index === question.correctAnswer
+              ) {
                 className =
                   "w-full p-4 text-left rounded-lg border-2 border-green-500 bg-green-50";
                 icon = (
                   <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
                 );
-              } else {
-                className =
-                  "w-full p-4 text-left rounded-lg border-2 border-red-500 bg-red-50";
-                icon = (
-                  <XCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
-                );
               }
-            } else if (
-              selectedAnswer !== null &&
-              index === question.correctAnswer
-            ) {
-              className =
-                "w-full p-4 text-left rounded-lg border-2 border-green-500 bg-green-50";
-              icon = (
-                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0" />
+
+              return (
+                <button
+                  key={index}
+                  onClick={() => setSelectedAnswer(index)}
+                  disabled={selectedAnswer !== null}
+                  className={className}
+                >
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-card-foreground text-left flex-1">
+                      {option}
+                    </span>
+                    {icon}
+                  </div>
+                </button>
               );
-            }
-
-            return (
-              <button
-                key={index}
-                onClick={() => setSelectedAnswer(index)}
-                disabled={selectedAnswer !== null}
-                className={className}
-              >
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-gray-900 text-left flex-1">
-                    {option}
-                  </span>
-                  {icon}
-                </div>
-              </button>
-            );
-          })}
-        </div>
-
-        {selectedAnswer !== null && (
-          <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <p className="font-medium text-blue-900 mb-2">Explanation:</p>
-            <p className="text-blue-800">{question.explanation}</p>
+            })}
           </div>
-        )}
+
+          {selectedAnswer !== null && (
+            <div className="p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="font-medium text-blue-900 mb-2">Explanation:</p>
+              <p className="text-blue-800">{question.explanation}</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
 }
 
-function Sidebar({
+function CourseSidebar({
   modules,
   activeModule,
   activeItem,
   onSelect,
   isOpen,
-  onToggle,
+  onClose,
 }: {
   modules: Module[];
   activeModule: number;
   activeItem: number;
   onSelect: (moduleIndex: number, itemIndex: number) => void;
   isOpen: boolean;
-  onToggle: () => void;
+  onClose: () => void;
 }) {
   return (
     <>
-      {/* Backdrop */}
+      {/* Mobile backdrop */}
       {isOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden" onClick={onToggle} />
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={onClose}
+        />
       )}
 
       {/* Sidebar */}
-      <div
-        className={`
-        fixed right-0 top-0 h-full w-80 max-w-[90vw] bg-white border-l border-gray-200 
-        transform transition-transform duration-300 z-50 flex flex-col
-        ${isOpen ? "translate-x-0" : "translate-x-full"}
-        lg:relative lg:translate-x-0 lg:z-auto lg:w-80
-        ${!isOpen ? "lg:w-0 lg:border-0" : ""}
-      `}
-      >
-        {isOpen && (
-          <>
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 flex-shrink-0">
-              <h3 className="font-semibold text-gray-900">Course Content</h3>
-              <button
-                onClick={onToggle}
-                className="p-2 hover:bg-gray-100 rounded-lg"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto min-h-0 p-4">
-              {modules.map((module, mIndex) => (
-                <div key={module.id} className="mb-6">
-                  <h4 className="font-medium text-gray-900 mb-3 text-sm uppercase tracking-wide">
-                    {module.title}
-                  </h4>
-                  <div className="space-y-2">
-                    {module.items.map((item, iIndex) => {
-                      const isActive =
-                        mIndex === activeModule && iIndex === activeItem;
-                      const typeLabels = {
-                        video: "Video",
-                        text: "Reading",
-                        audio: "Audio",
-                        quiz: "Quiz",
-                      };
-
-                      return (
-                        <button
-                          key={iIndex}
-                          onClick={() => onSelect(mIndex, iIndex)}
-                          className={`
-                            w-full text-left p-3 rounded-lg transition-all text-sm
-                            ${
-                              isActive
-                                ? "bg-blue-50 text-blue-900 border border-blue-200"
-                                : "hover:bg-gray-50 text-gray-700"
-                            }
-                          `}
-                        >
-                          <div className="font-medium mb-1">
-                            {typeLabels[item.type]} • {item.title}
-                          </div>
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </>
+      <aside
+        className={cn(
+          "fixed right-0 top-0 bottom-0 w-80 bg-background border-l z-50 flex flex-col",
+          "lg:block lg:z-auto lg:border-l",
+          "transform transition-transform duration-300",
+          isOpen ? "translate-x-0" : "translate-x-full lg:translate-x-0",
+          !isOpen && "lg:hidden"
         )}
-      </div>
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between mt-16.25 p-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <h2 className="font-semibold text-foreground">Course Content</h2>
+
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-muted rounded-lg transition-colors"
+            title="Show course content"
+          >
+            <Menu className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Scrollable content */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-6">
+          {modules.map((module, mIndex) => (
+            <div key={module.id}>
+              <h3 className="font-medium text-foreground mb-3 text-sm uppercase tracking-wide">
+                {module.title}
+              </h3>
+              <div className="space-y-2">
+                {module.items.map((item, iIndex) => {
+                  const isActive =
+                    mIndex === activeModule && iIndex === activeItem;
+                  const typeLabels = {
+                    video: "Video",
+                    text: "Reading",
+                    audio: "Audio",
+                    quiz: "Quiz",
+                  };
+
+                  return (
+                    <button
+                      key={iIndex}
+                      onClick={() => {
+                        onSelect(mIndex, iIndex);
+                        // Removed onClose() to keep sidebar open
+                      }}
+                      className={cn(
+                        "w-full text-left p-3 rounded-lg transition-all text-sm",
+                        isActive
+                          ? "bg-primary/10 text-primary border border-primary/20"
+                          : "hover:bg-muted text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      <div className="font-medium">
+                        {typeLabels[item.type]} • {item.title}
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </aside>
     </>
   );
 }
 
-function TranscriptPanel({
+function TranscriptSidebar({
   transcript,
   isOpen,
-  onToggle,
+  onClose,
 }: {
   transcript?: string;
   isOpen: boolean;
-  onToggle: () => void;
+  onClose: () => void;
 }) {
   if (!transcript) return null;
 
   return (
     <>
-      {/* Backdrop (only mobile) */}
+      {/* Mobile backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-          onClick={onToggle}
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={onClose}
         />
       )}
 
-      {/* Panel */}
-      <div
-        className={`
-        fixed left-0 top-0 h-full w-80 max-w-[90vw] bg-white border-r border-gray-200
-        transform transition-transform duration-300 z-50 flex flex-col
-        ${isOpen ? "translate-x-0" : "-translate-x-full"}
-        lg:relative lg:z-auto lg:w-80
-      `}
-      >
-        {isOpen && (
-          <>
-            <div className="flex items-center justify-between p-4 border-b border-gray-200 flex-shrink-0">
-              <div className="flex items-center gap-2">
-                <FileText className="w-5 h-5 text-gray-500" />
-                <h3 className="font-semibold text-gray-900">Transcript</h3>
-              </div>
-              <button
-                onClick={onToggle}
-                className="p-2 hover:bg-gray-100 rounded-lg"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="flex-1 overflow-y-auto min-h-0 p-4">
-              <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
-                {transcript.split("\n\n").map((paragraph, index) => (
-                  <div key={index} className="p-3 bg-gray-50 rounded-lg">
-                    {paragraph}
-                  </div>
-                ))}
-              </div>
-            </div>
-          </>
+      {/* Sidebar */}
+      <aside
+        className={cn(
+          "fixed left-0 top-0 bottom-0 w-80 bg-background border-r z-50 flex flex-col",
+          "lg:block lg:z-auto lg:border-r",
+          "transform transition-transform duration-300",
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
+          !isOpen && "lg:hidden"
         )}
-      </div>
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between p-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="flex items-center gap-2">
+            <FileText className="w-4 h-4 text-muted-foreground" />
+            <h2 className="font-semibold text-foreground">Transcript</h2>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-2 hover:bg-muted rounded-lg lg:hidden"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Scrollable transcript content */}
+        <div className="flex-1 overflow-y-auto p-4">
+          <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+            {transcript.split("\n\n").map((paragraph, index) => (
+              <div key={index} className="p-3 bg-muted/50 rounded-lg">
+                {paragraph}
+              </div>
+            ))}
+          </div>
+        </div>
+      </aside>
     </>
   );
 }
@@ -421,8 +437,8 @@ function TranscriptPanel({
 export default function CoursePlayer() {
   const [moduleIndex, setModuleIndex] = useState(0);
   const [itemIndex, setItemIndex] = useState(0);
-  const [sidebarOpen, setSidebarOpen] = useState(true); // open by default
-  const [transcriptOpen, setTranscriptOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [transcriptOpen, setTranscriptOpen] = useState(false);
 
   const currentModule = modules[moduleIndex];
   const currentItem = currentModule.items[itemIndex];
@@ -440,7 +456,7 @@ export default function CoursePlayer() {
       setModuleIndex(moduleIndex + 1);
       setItemIndex(0);
     }
-    setSidebarOpen(true); // keep sidebar open after next
+    setSidebarOpen(true);
   }, [itemIndex, moduleIndex, currentModule.items.length]);
 
   const goPrev = () => {
@@ -479,120 +495,106 @@ export default function CoursePlayer() {
   }, [currentItem, goNext]);
 
   return (
-    <div className=" flex flex-col">
+    <div className="h-screen flex flex-col bg-background">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 flex-shrink-0">
-        <div className="px-4 py-4">
-          <div className="flex items-center justify-between max-w-7xl mx-auto">
-            <div className="flex items-center gap-4">
-              <button className="flex items-center gap-2 text-gray-600 hover:text-gray-900">
-                <ChevronLeft className="w-5 h-5" />
-                <span className="hidden sm:inline cursor-pointer">
-                  Back to Course
-                </span>
-              </button>
-            </div>
+      <header className="flex-shrink-0  bg-background/95 max-w-4xl mx-auto w-full ">
+        <div className="px-4 py-3">
+          <div className="flex items-center justify-between">
+            {/* Back button */}
+            <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors flex-shrink-0">
+              <ArrowLeft className="w-4 h-4" />
+              <span className="hidden sm:inline font-medium">
+                Back to Course
+              </span>
+            </button>
 
-            <h1 className="font-semibold text-gray-900 text-center flex-1 mx-4 truncate">
+            {/* Title */}
+            <h1 className="font-semibold text-foreground text-center mx-4 truncate">
               {currentItem.title}
             </h1>
 
-            <div className="flex items-center gap-2">
+            {/* Actions */}
+            <div className="flex items-center gap-2 flex-shrink-0">
               {isVideo && (
                 <button
-                  onClick={() => setTranscriptOpen(true)}
-                  className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
+                  onClick={() => setTranscriptOpen((open) => !open)}
+                  className="p-2 hover:bg-muted rounded-lg transition-colors"
+                  title={transcriptOpen ? "Hide transcript" : "Show transcript"}
                 >
-                  <FileText className="w-5 h-5" />
+                  <FileText className="w-4 h-4" />
                 </button>
               )}
-              <button
-                onClick={() => setSidebarOpen(true)}
-                className="lg:hidden p-2 hover:bg-gray-100 rounded-lg"
-              >
-                <Menu className="w-5 h-5" />
-              </button>
+              {!sidebarOpen && (
+                <button
+                  onClick={() => setSidebarOpen(true)}
+                  className="p-2 hover:bg-muted rounded-lg transition-colors"
+                  title="Show course content"
+                >
+                  <Menu className="w-4 h-4" />
+                </button>
+              )}
             </div>
           </div>
         </div>
       </header>
 
-      <div className="flex flex-1 min-h-0 overflow-hidden">
-        {/* Transcript Sidebar */}
-        {isVideo && (
-          <TranscriptPanel
-            transcript={currentItem.transcript}
-            isOpen={transcriptOpen}
-            onToggle={() => setTranscriptOpen(!transcriptOpen)}
-          />
-        )}
-
-        {/* Main Content */}
-        <main className="flex-1 overflow-y-auto min-h-0">
-          <div className="p-4 lg:p-8 pb-24">
-            <div className="max-w-4xl mx-auto">{content}</div>
-          </div>
-        </main>
-
-        {/* Course Sidebar */}
-        <Sidebar
-          modules={modules}
-          activeModule={moduleIndex}
-          activeItem={itemIndex}
-          onSelect={(m, i) => {
-            setModuleIndex(m);
-            setItemIndex(i);
-            setSidebarOpen(true); // always open after select
-          }}
-          isOpen={sidebarOpen}
-          onToggle={() => setSidebarOpen(!sidebarOpen)}
+      {/* Main layout */}
+      {isVideo && (
+        <TranscriptSidebar
+          transcript={currentItem.transcript}
+          isOpen={transcriptOpen}
+          onClose={() => setTranscriptOpen(false)}
         />
-      </div>
+      )}
 
-      {/* Fixed Navigation */}
+      {/* Main content */}
+      <main
+        className={cn(
+          "flex-1 overflow-y-auto bg-background lg:mx-80",
+          transcriptOpen && "lg:ml-80",
+          sidebarOpen && "lg:mr-80"
+        )}
+      >
+        <div className="p-4 lg:p-8 pb-24 max-w-4xl mx-auto">{content}</div>
+      </main>
+
+      {/* Course sidebar (right) */}
+      <CourseSidebar
+        modules={modules}
+        activeModule={moduleIndex}
+        activeItem={itemIndex}
+        onSelect={(m, i) => {
+          setModuleIndex(m);
+          setItemIndex(i);
+          setSidebarOpen(true);
+        }}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+
+      {/* Navigation buttons */}
       <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-30">
-        <div className="flex gap-3 bg-white rounded-lg shadow-lg border border-gray-200 px-4 py-2">
+        <div className="flex items-center gap-2 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 rounded-lg shadow-lg border px-3 py-2">
           <button
             onClick={goPrev}
             disabled={!canPrev}
-            className="flex items-center gap-2 px-4 py-1 text-gray-700 hover:text-gray-900 disabled:opacity-50 disabled:hover:text-gray-700"
+            className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-foreground disabled:opacity-50 disabled:hover:text-muted-foreground transition-colors rounded-md hover:bg-muted"
           >
             <ChevronLeft className="w-4 h-4" />
-            <span className="font-medium">Previous</span>
+            <span className="font-medium text-sm">Previous</span>
           </button>
 
-          <div className="w-px bg-gray-200"></div>
+          <div className="w-px h-6 bg-border"></div>
 
           <button
             onClick={goNext}
             disabled={!canNext}
-            className="flex items-center gap-2 px-4 py-1 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:hover:bg-red-600"
+            className="flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:hover:bg-primary transition-colors"
           >
-            <span className="font-medium">Next</span>
+            <span className="font-medium text-sm">Next</span>
             <ChevronRight className="w-4 h-4" />
           </button>
         </div>
-      </div>
-
-      {/* Toggle buttons for desktop - positioned where close buttons are */}
-      <div className="hidden lg:block">
-        {isVideo && !transcriptOpen && (
-          <button
-            onClick={() => setTranscriptOpen(true)}
-            className="fixed left-4 top-34 p-2 bg-white border border-gray-200 rounded-lg shadow-lg hover:bg-gray-50 z-20"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        )}
-
-        {!sidebarOpen && (
-          <button
-            onClick={() => setSidebarOpen(true)}
-            className="fixed right-4 top-34 p-2 bg-white border border-gray-200 rounded-lg shadow-lg hover:bg-gray-50 z-20"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-        )}
       </div>
     </div>
   );
