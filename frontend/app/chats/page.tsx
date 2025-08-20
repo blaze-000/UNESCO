@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Input } from "@/components/ui/input";
 import { Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 type StreamEvent = {
   type: "progress" | "result" | "error";
@@ -219,9 +221,110 @@ export default function ChatsPage() {
             className="text-left"
           >
             <div className="inline-block max-w-3xl">
-              <div className="bg-white  rounded-2xl px-4 py-3">
-                <div className="text-gray-700 leading-relaxed whitespace-pre-wrap">
-                  {message.content}
+              <div className="bg-white rounded-2xl px-4 py-3">
+                <div className="text-gray-700 leading-relaxed prose prose-sm max-w-none">
+                  <ReactMarkdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      h1: ({ children }) => (
+                        <h1 className="text-xl font-bold mb-3 mt-0 text-gray-900 leading-tight">
+                          {children}
+                        </h1>
+                      ),
+                      h2: ({ children }) => (
+                        <h2 className="text-lg font-semibold mb-2 mt-4 first:mt-0 text-gray-900 leading-tight">
+                          {children}
+                        </h2>
+                      ),
+                      h3: ({ children }) => (
+                        <h3 className="text-base font-medium mb-2 mt-3 first:mt-0 text-gray-900 leading-tight">
+                          {children}
+                        </h3>
+                      ),
+                      p: ({ children }) => (
+                        <p className="text-gray-700 mb-3 last:mb-0 leading-relaxed">
+                          {children}
+                        </p>
+                      ),
+                      ul: ({ children }) => (
+                        <ul className="list-disc list-inside mb-3 space-y-1">
+                          {children}
+                        </ul>
+                      ),
+                      ol: ({ children }) => (
+                        <ol className="list-decimal list-inside mb-3 space-y-1">
+                          {children}
+                        </ol>
+                      ),
+                      li: ({ children }) => (
+                        <li className="text-gray-700 leading-relaxed">
+                          {children}
+                        </li>
+                      ),
+                      a: ({ children, href }) => (
+                        <a
+                          href={href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-blue-600 hover:text-blue-800 underline transition-colors"
+                        >
+                          {children}
+                        </a>
+                      ),
+                      table: ({ children }) => (
+                        <div className="overflow-x-auto mb-3">
+                          <table className="table-auto border-collapse border border-gray-300 w-full">
+                            {children}
+                          </table>
+                        </div>
+                      ),
+                      thead: ({ children }) => (
+                        <thead className="bg-gray-50">{children}</thead>
+                      ),
+                      th: ({ children }) => (
+                        <th className="border border-gray-300 px-3 py-2 text-left font-semibold text-gray-900">
+                          {children}
+                        </th>
+                      ),
+                      td: ({ children }) => (
+                        <td className="border border-gray-300 px-3 py-2 text-gray-700">
+                          {children}
+                        </td>
+                      ),
+                      code: ({ inline, children, ...props }) => (
+                        <code
+                          className={
+                            inline
+                              ? "bg-gray-100 text-gray-800 px-1 py-0.5 rounded text-sm font-mono"
+                              : "block bg-gray-900 text-white p-3 rounded-md my-3 overflow-x-auto text-sm font-mono leading-relaxed"
+                          }
+                          {...props}
+                        >
+                          {children}
+                        </code>
+                      ),
+                      pre: ({ children }) => (
+                        <pre className="bg-gray-900 text-white p-3 rounded-md my-3 overflow-x-auto">
+                          {children}
+                        </pre>
+                      ),
+                      blockquote: ({ children }) => (
+                        <blockquote className="border-l-4 border-gray-300 pl-4 italic text-gray-600 my-3">
+                          {children}
+                        </blockquote>
+                      ),
+                      strong: ({ children }) => (
+                        <strong className="font-semibold text-gray-900">
+                          {children}
+                        </strong>
+                      ),
+                      em: ({ children }) => (
+                        <em className="italic text-gray-700">{children}</em>
+                      ),
+                    }}
+                  >
+                    {message.content}
+                  </ReactMarkdown>
                 </div>
               </div>
             </div>
@@ -238,11 +341,11 @@ export default function ChatsPage() {
           >
             <div className="inline-block max-w-3xl">
               <div className="bg-red-50 border border-red-200 rounded-2xl px-4 py-3">
-                <p className="text-red-700">{message.content}</p>
+                <p className="text-red-700 mb-0">{message.content}</p>
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-red-600 hover:text-red-800 mt-2"
+                  className="text-red-600 hover:text-red-800 mt-2 px-0"
                   onClick={retryVerification}
                 >
                   Retry
@@ -301,7 +404,7 @@ export default function ChatsPage() {
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onKeyDown={handleKeyDown}
-                    className="flex-1 border-0 bg-transparent text-gray-700 placeholder-gray-400 focus-visible:ring-0 px-4 py-6 focus-visible:ring-offset-0 text-lg"
+                    className="flex-1 line-clamp-3 border-0 bg-transparent text-gray-700 placeholder-gray-400 focus-visible:ring-0 px-4 py-6 focus-visible:ring-offset-0 text-lg"
                   />
                   <Button
                     variant="ghost"
