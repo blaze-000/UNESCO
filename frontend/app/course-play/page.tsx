@@ -11,6 +11,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 // Types
 interface QuizQuestion {
@@ -94,6 +95,8 @@ const modules: Module[] = [
     ],
   },
 ];
+
+
 
 // Components
 function VideoPlayer({ content }: { content: string }) {
@@ -440,6 +443,8 @@ export default function CoursePlayer() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [transcriptOpen, setTranscriptOpen] = useState(false);
 
+  const router = useRouter();
+
   const currentModule = modules[moduleIndex];
   const currentItem = currentModule.items[itemIndex];
   const isVideo = currentItem.type === "video";
@@ -494,6 +499,9 @@ export default function CoursePlayer() {
     }
   }, [currentItem, goNext]);
 
+   
+
+
   return (
     <div className="h-screen flex flex-col bg-background">
       {/* Header */}
@@ -501,9 +509,10 @@ export default function CoursePlayer() {
         <div className="px-4 py-3">
           <div className="flex items-center justify-between">
             {/* Back button */}
-            <button className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors flex-shrink-0">
+            <button onClick={() => router.push("/course")} 
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors flex-shrink-0">
               <ArrowLeft className="w-4 h-4" />
-              <span className="hidden sm:inline font-medium">
+              <span className="hidden sm:inline font-medium cursor-pointer">
                 Back to Course
               </span>
             </button>
