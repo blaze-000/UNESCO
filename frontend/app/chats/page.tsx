@@ -8,6 +8,7 @@ import { Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 type StreamEvent = {
   type: "progress" | "result" | "error";
@@ -225,14 +226,16 @@ export default function ChatsPage() {
                 <div className="text-gray-700 leading-relaxed prose prose-sm max-w-none">
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]}
+                    
                     components={{
                       h1: ({ children }) => (
-                        <h1 className="text-xl font-bold mb-3 mt-0 text-gray-900 leading-tight">
+                        <h1 className="text-2xl font-bold mb-3 mt-0 text-gray-900 leading-tight">
                           {children}
                         </h1>
                       ),
                       h2: ({ children }) => (
-                        <h2 className="text-lg font-semibold mb-2 mt-4 first:mt-0 text-gray-900 leading-tight">
+                        <h2 className="text-xl font-semibold mb-2 mt-4 first:mt-0 text-gray-900 leading-tight">
                           {children}
                         </h2>
                       ),

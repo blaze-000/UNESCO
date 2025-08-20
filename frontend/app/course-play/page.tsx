@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -20,11 +20,32 @@ import {
   XCircle,
 } from "lucide-react";
 import Link from "next/link";
-import { useParams, useRouter } from "next/navigation";
 
-// Mock content data
-const contentData: Record<string, any> = {
-  "1-1": {
+type ContentItem =
+  | {
+      type: "video";
+      title: string;
+      content: string; // video url or id
+      transcript?: string;
+    }
+  | {
+      type: "text";
+      title: string;
+      content: string; // markdown-ish text
+    }
+  | {
+      type: "quiz";
+      title: string;
+      content: Array<{
+        question: string;
+        options: string[];
+        correctAnswer: number;
+        explanation: string;
+      }>;
+    };
+
+const contentList: ContentItem[] = [
+  {
     type: "video",
     title: "Welcome to MIL",
     content: "https://www.example.com/video",
@@ -36,7 +57,7 @@ Today's digital landscape presents both opportunities and challenges. We have un
 
 This course will equip you with the tools and knowledge needed to navigate this complex information environment effectively.`,
   },
-  "1-2": {
+  {
     type: "text",
     title: "Identifying Misinformation Patterns",
     content: `# Identifying Misinformation Patterns
@@ -63,7 +84,7 @@ Today's information ecosystem is characterized by rapid information flow, algori
 • Algorithmic bias in content recommendation
 • Privacy concerns and data manipulation`,
   },
-  "1-3": {
+  {
     type: "quiz",
     title: "Practice: Evaluating Sources",
     content: [
@@ -82,44 +103,11 @@ Today's information ecosystem is characterized by rapid information flow, algori
       },
     ],
   },
-};
+];
 
-export default function CoursePlayPage() {
-  const params = useParams();
-  const contentId = params.id as string;
-  const currentContent = contentData[contentId] || contentData["1-1"];
-  const router = useRouter();
-
-  const [transcriptOpen, setTranscriptOpen] = useState(true);
+function VideoPlayer({ title }: { title: string }) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null); // Track selected answer instead of array
-
-  const contentOrder = ["1-1", "1-2", "1-3"];
-  const currentIndex =
-    contentOrder.indexOf(contentId) === -1
-      ? 0
-      : contentOrder.indexOf(contentId);
-  const prevId = currentIndex > 0 ? contentOrder[currentIndex - 1] : null;
-  const nextId =
-    currentIndex < contentOrder.length - 1
-      ? contentOrder[currentIndex + 1]
-      : null;
-
-  const handlePrev = () => {
-    if (prevId) router.push(`/course-play/${prevId}`);
-  };
-
-  const handleNext = () => {
-    if (nextId) router.push(`/course-play/${nextId}`);
-  };
-
-  const handleQuizAnswer = (answerIndex: number) => {
-    setSelectedAnswer(answerIndex);
-  };
-
-  // removed chat/assistant logic
-
-  const renderVideoPlayer = () => (
+  return (
     <Card className="w-full">
       <CardContent className="p-0">
         <div className="relative bg-gray-900 aspect-video rounded-t-lg flex items-center justify-center">
@@ -129,7 +117,7 @@ export default function CoursePlayPage() {
                 <Play className="w-4 h-4 text-white ml-0.5" />
               </div>
             </div>
-            <p className="text-lg mb-2">Video: Welcome to MIL</p>
+            <p className="text-lg mb-2">Video: {title}</p>
             <p className="text-sm opacity-75">Click play to start learning</p>
           </div>
           <div className="absolute bottom-4 left-4 right-4">
@@ -160,116 +148,105 @@ export default function CoursePlayPage() {
       </CardContent>
     </Card>
   );
+}
 
-  const renderTextContent = () => (
+function InfoContent({ title, content }: { title: string; content: string }) {
+  return (
     <div className="w-full max-w-4xl mx-auto">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          {currentContent.title}
-        </h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{title}</h1>
         <p className="text-sm text-gray-500">
           Estimated reading time: 12 min read
         </p>
       </div>
-
       <div className="prose max-w-none text-gray-700 leading-relaxed space-y-6">
-        {currentContent.content
-          .split("\n")
-          .map((paragraph: string, index: number) => {
-            if (paragraph.startsWith("# ")) {
-              return (
-                <h1
-                  key={index}
-                  className="text-2xl font-bold text-gray-900 mt-8 mb-4"
-                >
-                  {paragraph.slice(2)}
-                </h1>
-              );
-            } else if (paragraph.startsWith("## ")) {
-              return (
-                <h2
-                  key={index}
-                  className="text-xl font-bold text-gray-900 mt-6 mb-3"
-                >
-                  {paragraph.slice(3)}
-                </h2>
-              );
-            } else if (paragraph.startsWith("### ")) {
-              return (
-                <h3
-                  key={index}
-                  className="text-lg font-bold text-gray-900 mt-4 mb-2"
-                >
-                  {paragraph.slice(4)}
-                </h3>
-              );
-            } else if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
-              return (
-                <p key={index} className="font-bold text-gray-900 mb-2">
-                  {paragraph.slice(2, -2)}
-                </p>
-              );
-            } else if (paragraph.startsWith("• ")) {
-              return (
-                <div key={index} className="ml-4 mb-2">
-                  <span className="text-red-500 mr-2">•</span>
-                  <span>{paragraph.slice(2)}</span>
-                </div>
-              );
-            } else if (paragraph.trim() === "") {
-              return <div key={index} className="h-4"></div>;
-            } else {
-              return (
-                <p key={index} className="mb-4 text-gray-700">
-                  {paragraph}
-                </p>
-              );
-            }
-          })}
+        {content.split("\n").map((paragraph: string, index: number) => {
+          if (paragraph.startsWith("# ")) {
+            return (
+              <h1
+                key={index}
+                className="text-2xl font-bold text-gray-900 mt-8 mb-4"
+              >
+                {paragraph.slice(2)}
+              </h1>
+            );
+          } else if (paragraph.startsWith("## ")) {
+            return (
+              <h2
+                key={index}
+                className="text-xl font-bold text-gray-900 mt-6 mb-3"
+              >
+                {paragraph.slice(3)}
+              </h2>
+            );
+          } else if (paragraph.startsWith("### ")) {
+            return (
+              <h3
+                key={index}
+                className="text-lg font-bold text-gray-900 mt-4 mb-2"
+              >
+                {paragraph.slice(4)}
+              </h3>
+            );
+          } else if (paragraph.startsWith("**") && paragraph.endsWith("**")) {
+            return (
+              <p key={index} className="font-bold text-gray-900 mb-2">
+                {paragraph.slice(2, -2)}
+              </p>
+            );
+          } else if (paragraph.startsWith("• ")) {
+            return (
+              <div key={index} className="ml-4 mb-2">
+                <span className="text-red-500 mr-2">•</span>
+                <span>{paragraph.slice(2)}</span>
+              </div>
+            );
+          } else if (paragraph.trim() === "") {
+            return <div key={index} className="h-4"></div>;
+          } else {
+            return (
+              <p key={index} className="mb-4 text-gray-700">
+                {paragraph}
+              </p>
+            );
+          }
+        })}
       </div>
     </div>
   );
+}
 
-  const renderQuiz = () => {
-    const question = currentContent.content[0];
+function QuizContent({
+  title,
+  questionBlock,
+}: {
+  title: string;
+  questionBlock: ContentItem & { type: "quiz" }["content"][number];
+}) {
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  return (
+    <Card className="w-full max-w-4xl mx-auto">
+      <CardHeader>
+        <div className="flex justify-between items-center">
+          <h2 className="text-2xl font-bold">{title}</h2>
+          <span className="text-sm text-gray-500">
+            Question 1 of 5 • 5 points
+          </span>
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="space-y-4">
+          <h3 className="text-lg font-medium text-gray-900">
+            {questionBlock.question}
+          </h3>
+          <div className="space-y-3">
+            {questionBlock.options.map((option: string, index: number) => {
+              let buttonStyle =
+                "w-full p-4 text-left rounded-lg border transition-all hover:border-gray-300";
+              let iconElement: JSX.Element | null = null;
 
-    return (
-      <Card className="w-full max-w-4xl mx-auto">
-        <CardHeader>
-          <div className="flex justify-between items-center">
-            <h2 className="text-2xl font-bold">{currentContent.title}</h2>
-            <span className="text-sm text-gray-500">
-              Question 1 of 5 • 5 points
-            </span>
-          </div>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-4">
-            <h3 className="text-lg font-medium text-gray-900">
-              {question.question}
-            </h3>
-            <div className="space-y-3">
-              {question.options.map((option: string, index: number) => {
-                let buttonStyle =
-                  "w-full p-4 text-left rounded-lg border transition-all hover:border-gray-300";
-                let iconElement = null;
-
-                if (selectedAnswer === index) {
-                  if (index === question.correctAnswer) {
-                    buttonStyle =
-                      "w-full p-4 text-left rounded-lg border-2 border-green-500 bg-green-50";
-                    iconElement = (
-                      <CheckCircle className="w-5 h-5 text-green-600" />
-                    );
-                  } else {
-                    buttonStyle =
-                      "w-full p-4 text-left rounded-lg border-2 border-red-500 bg-red-50";
-                    iconElement = <XCircle className="w-5 h-5 text-red-600" />;
-                  }
-                } else if (
-                  selectedAnswer !== null &&
-                  index === question.correctAnswer
-                ) {
+              if (selectedAnswer === index) {
+                if (index === questionBlock.correctAnswer) {
                   buttonStyle =
                     "w-full p-4 text-left rounded-lg border-2 border-green-500 bg-green-50";
                   iconElement = (
@@ -277,65 +254,90 @@ export default function CoursePlayPage() {
                   );
                 } else {
                   buttonStyle =
-                    "w-full p-4 text-left rounded-lg border border-gray-200";
+                    "w-full p-4 text-left rounded-lg border-2 border-red-500 bg-red-50";
+                  iconElement = <XCircle className="w-5 h-5 text-red-600" />;
                 }
-
-                return (
-                  <button
-                    key={index}
-                    onClick={() => handleQuizAnswer(index)}
-                    disabled={selectedAnswer !== null} // Disable after selection
-                    className={buttonStyle}
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-gray-900">{option}</span>
-                      {iconElement}
-                    </div>
-                  </button>
+              } else if (
+                selectedAnswer !== null &&
+                index === questionBlock.correctAnswer
+              ) {
+                buttonStyle =
+                  "w-full p-4 text-left rounded-lg border-2 border-green-500 bg-green-50";
+                iconElement = (
+                  <CheckCircle className="w-5 h-5 text-green-600" />
                 );
-              })}
-            </div>
+              } else {
+                buttonStyle =
+                  "w-full p-4 text-left rounded-lg border border-gray-200";
+              }
 
-            {selectedAnswer !== null && (
-              <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-                <p className="text-sm font-medium text-blue-900 mb-1">
-                  Explanation:
-                </p>
-                <p className="text-sm text-blue-800">{question.explanation}</p>
-              </div>
-            )}
+              return (
+                <button
+                  key={index}
+                  onClick={() => setSelectedAnswer(index)}
+                  disabled={selectedAnswer !== null}
+                  className={buttonStyle}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="text-gray-900">{option}</span>
+                    {iconElement}
+                  </div>
+                </button>
+              );
+            })}
           </div>
 
           {selectedAnswer !== null && (
-            <div className="flex justify-between items-center pt-4">
-              <Button variant="outline" className="px-6 bg-transparent">
-                Previous Question
-              </Button>
-              <div className="text-sm text-gray-500">
-                Progress: 20% complete
-              </div>
-              <Button className="bg-red-500 hover:bg-red-600 text-white px-6">
-                Next Question
-              </Button>
+            <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="text-sm font-medium text-blue-900 mb-1">
+                Explanation:
+              </p>
+              <p className="text-sm text-blue-800">
+                {questionBlock.explanation}
+              </p>
             </div>
           )}
-        </CardContent>
-      </Card>
-    );
-  };
+        </div>
 
-  const renderMainContent = () => {
-    switch (currentContent.type) {
-      case "video":
-        return renderVideoPlayer();
-      case "text":
-        return renderTextContent();
-      case "quiz":
-        return renderQuiz();
-      default:
-        return renderTextContent();
+        {selectedAnswer !== null && (
+          <div className="flex justify-between items-center pt-4">
+            <Button variant="outline" className="px-6 bg-transparent">
+              Previous Question
+            </Button>
+            <div className="text-sm text-gray-500">Progress: 20% complete</div>
+            <Button className="bg-red-500 hover:bg-red-600 text-white px-6">
+              Next Question
+            </Button>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+export default function CoursePlaySinglePage() {
+  const [transcriptOpen, setTranscriptOpen] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const current = contentList[currentIndex];
+
+  const canPrev = currentIndex > 0;
+  const canNext = currentIndex < contentList.length - 1;
+
+  const goPrev = () => canPrev && setCurrentIndex((i) => i - 1);
+  const goNext = () => canNext && setCurrentIndex((i) => i + 1);
+
+  const mainContent = useMemo(() => {
+    if (current.type === "video") {
+      return <VideoPlayer title={current.title} />;
     }
-  };
+    if (current.type === "text") {
+      return <InfoContent title={current.title} content={current.content} />;
+    }
+    return (
+      <QuizContent title={current.title} questionBlock={current.content[0]} />
+    );
+  }, [current]);
 
   return (
     <div className="fixed inset-0 overflow-hidden bg-white flex flex-col">
@@ -351,7 +353,7 @@ export default function CoursePlayPage() {
 
           <div className="flex-1 mx-8 text-center">
             <span className="font-medium text-sm text-gray-800">
-              {currentContent.title}
+              {current.title}
             </span>
           </div>
 
@@ -359,16 +361,16 @@ export default function CoursePlayPage() {
             <Button
               variant="ghost"
               size="sm"
-              onClick={handlePrev}
-              disabled={!prevId}
+              onClick={goPrev}
+              disabled={!canPrev}
             >
               Previous
             </Button>
             <Button
               className="bg-red-500 hover:bg-red-600 text-white"
               size="sm"
-              onClick={handleNext}
-              disabled={!nextId}
+              onClick={goNext}
+              disabled={!canNext}
             >
               Next
               <ChevronRight className="w-4 h-4 ml-1" />
@@ -379,8 +381,8 @@ export default function CoursePlayPage() {
 
       {/* Main Content Area */}
       <div className="flex-1 flex overflow-hidden">
-        {/* Left Sidebar - Transcript (only for video) */}
-        {currentContent.type === "video" && (
+        {/* Transcript only for video */}
+        {current.type === "video" && (
           <Collapsible open={transcriptOpen} onOpenChange={setTranscriptOpen}>
             <div
               className={`transition-all duration-300 border-r border-gray-100 h-full ${
@@ -403,11 +405,12 @@ export default function CoursePlayPage() {
               </div>
 
               <CollapsibleContent className="flex-1 overflow-hidden">
-                {currentContent.transcript && (
+                {(current as Extract<ContentItem, { type: "video" }>)
+                  .transcript && (
                   <div className="p-4 h-full overflow-y-auto">
                     <div className="text-sm text-gray-700 leading-relaxed space-y-4">
-                      {currentContent.transcript
-                        .split("\n\n")
+                      {(current as Extract<ContentItem, { type: "video" }>)
+                        .transcript!.split("\n\n")
                         .map((paragraph: string, index: number) => (
                           <div
                             key={index}
@@ -426,11 +429,7 @@ export default function CoursePlayPage() {
 
         {/* Center - Main Content */}
         <div className="flex-1 p-6 h-full overflow-hidden">
-          {currentContent.type === "text" ? (
-            renderMainContent()
-          ) : (
-            <div className="max-w-4xl mx-auto">{renderMainContent()}</div>
-          )}
+          <div className="max-w-4xl mx-auto">{mainContent}</div>
         </div>
       </div>
     </div>
