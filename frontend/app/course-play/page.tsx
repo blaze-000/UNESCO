@@ -1,6 +1,12 @@
 "use client";
-import { useState, useMemo, useEffect, useCallback } from "react";
+import { useState, useMemo, useEffect, useCallback, useRef } from "react";
+
 import {
+  Play,
+  Pause,
+  SkipBack,
+  SkipForward,
+  Volume2,
   ChevronLeft,
   ChevronRight,
   FileText,
@@ -9,6 +15,9 @@ import {
   Menu,
   X,
   ArrowLeft,
+  Shuffle,
+  Repeat,
+  MoreHorizontal,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useRouter } from "next/navigation";
@@ -26,6 +35,11 @@ interface ContentItem {
   title: string;
   content: string | QuizQuestion[];
   transcript?: string;
+}
+
+interface AudioPlayerProps {
+  title: string;
+  content: string;
 }
 
 interface Module {
@@ -96,8 +110,6 @@ const modules: Module[] = [
   },
 ];
 
-
-
 // Components
 function VideoPlayer({ content }: { content: string }) {
   return (
@@ -167,20 +179,164 @@ function TextContent({ content }: { content: string }) {
   );
 }
 
-function AudioPlayer({ title, content }: { title: string; content: string }) {
+function AudioPlayer({ title, content }: AudioPlayerProps) {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
+  const [volume, setVolume] = useState(1);
+  const audioRef = useRef<HTMLAudioElement>(null);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const updateTime = () => setCurrentTime(audio.currentTime || 0);
+    const updateDuration = () => setDuration(audio.duration || 0);
+    const handleEnded = () => setIsPlaying(false);
+
+    audio.addEventListener("timeupdate", updateTime);
+    audio.addEventListener("loadedmetadata", updateDuration);
+    audio.addEventListener("ended", handleEnded);
+
+    return () => {
+      audio.removeEventListener("timeupdate", updateTime);
+      audio.removeEventListener("loadedmetadata", updateDuration);
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, []);
+
+  const togglePlay = async () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    try {
+      if (isPlaying) {
+        audio.pause();
+        setIsPlaying(false);
+      } else {
+        await audio.play();
+        setIsPlaying(true);
+      }
+    } catch (error) {
+      console.error("Error playing audio:", error);
+      setIsPlaying(false);
+    }
+  };
+
+  const skipBackward = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+    audio.currentTime = Math.max(0, audio.currentTime - 10);
+  };
+
+  const skipForward = () => {
+    const audio = audioRef.current;
+    if (!audio || !duration) return;
+    audio.currentTime = Math.min(duration, audio.currentTime + 10);
+  };
+
+  const handleProgressChange = (e: React.MouseEvent<HTMLDivElement>) => {
+    const audio = audioRef.current;
+    if (!audio || !duration) return;
+
+    const rect = e.currentTarget.getBoundingClientRect();
+    const percent = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = percent * duration;
+  };
+
+  const formatTime = (time: number): string => {
+    if (!time || !isFinite(time)) return "0:00";
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
+
   return (
-    <div className="max-w-4xl mx-auto">
-      <div className="bg-card rounded-xl shadow-sm border p-6">
-        <h2 className="text-xl font-semibold text-card-foreground mb-6">
-          {title}
-        </h2>
-        <div className="bg-muted rounded-lg p-6">
-          <audio controls className="w-full">
-            <source src={content} />
-            Your browser does not support the audio element.
-          </audio>
+    <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-sm overflow-hidden">
+      {/* Album Cover and Info */}
+      <div className="flex p-4">
+        <div className="w-24 h-24 flex-shrink-0">
+          <img
+            src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=200&h=200&fit=crop&crop=face"
+            alt="Roy Young"
+            className="w-full h-full object-cover rounded-lg"
+          />
+        </div>
+
+        <div className="ml-4 flex-1 flex flex-col justify-center">
+          <h3 className="font-semibold text-lg text-gray-900">{title}</h3>
+          <p className="text-gray-600 text-sm">Roy Young</p>
         </div>
       </div>
+
+      {/* Progress Bar */}
+      <div className="px-4 mb-4">
+        <div className="flex items-center text-sm text-gray-500 mb-2">
+          <span>{formatTime(currentTime)}</span>
+          <div
+            className="flex-1 mx-3 h-1 bg-gray-300 rounded-full cursor-pointer relative"
+            onClick={handleProgressChange}
+          >
+            <div
+              className="h-full bg-blue-500 rounded-full"
+              style={{
+                width: `${duration ? (currentTime / duration) * 100 : 0}%`,
+              }}
+            />
+          </div>
+          <span>{formatTime(duration)}</span>
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div className="px-4 pb-4">
+        <div className="flex items-center justify-center gap-4">
+          <div className="flex items-center justify-end">
+            <button className="p-2 text-gray-400 hover:text-gray-600">
+              <SkipBack size={24} />
+            </button>
+
+            <button
+              onClick={togglePlay}
+              className="w-12 h-12 bg-gray-900 text-white rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors"
+              disabled={!content}
+            >
+              {isPlaying ? (
+                <Pause size={24} />
+              ) : (
+                <Play size={24} className="ml-0.5" />
+              )}
+            </button>
+
+            <button
+              onClick={skipForward}
+              className="p-2 text-gray-400 hover:text-gray-600"
+            >
+              <SkipForward size={24} />
+            </button>
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <Volume2 size={20} />
+            <div className="w-16 h-1 bg-gray-300 rounded-full">
+              <div
+                className="h-full bg-gray-600 rounded-full"
+                style={{ width: `${volume * 100}%` }}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <audio
+        ref={audioRef}
+        preload="metadata"
+        onError={(e) => console.error("Audio error:", e)}
+      >
+        <source src={content} type="audio/mpeg" />
+        <source src={content} type="audio/wav" />
+        <source src={content} type="audio/ogg" />
+      </audio>
     </div>
   );
 }
@@ -499,9 +655,6 @@ export default function CoursePlayer() {
     }
   }, [currentItem, goNext]);
 
-   
-
-
   return (
     <div className="h-screen flex flex-col bg-background">
       {/* Header */}
@@ -509,8 +662,10 @@ export default function CoursePlayer() {
         <div className="px-4 py-3">
           <div className="flex items-center justify-between">
             {/* Back button */}
-            <button onClick={() => router.push("/course")} 
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors flex-shrink-0">
+            <button
+              onClick={() => router.push("/course")}
+              className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors flex-shrink-0"
+            >
               <ArrowLeft className="w-4 h-4" />
               <span className="hidden sm:inline font-medium cursor-pointer">
                 Back to Course
