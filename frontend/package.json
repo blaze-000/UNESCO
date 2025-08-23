@@ -22,12 +22,9 @@
     "next": "15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-<<<<<<< HEAD
-=======
     "react-markdown": "^10.1.0",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.1",
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
     "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {

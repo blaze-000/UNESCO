@@ -109,11 +109,7 @@ def CheckMarketing(text, progress_callback=None):
 
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=500,
-<<<<<<< HEAD
-        chunk_overlap=150,
-=======
         chunk_overlap=100,
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
         separators=["\n\n", "\n", ".", "!", "?", ",", " ", ""],
     )
 
@@ -131,11 +127,7 @@ def CheckMarketing(text, progress_callback=None):
     claim_verificaton_list = []
     for i, claim in enumerate(claims):
 
-<<<<<<< HEAD
-        simmi = vectorstore.similarity_search(claim["claim"], k=5)
-=======
         simmi = vectorstore.similarity_search(claim["claim"], k=1)
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
 
         content = ""
 
@@ -167,11 +159,7 @@ def CheckMarketing(text, progress_callback=None):
         print("🦆 Step 7- Generating Final Response")
 
     final_prompt_ = final_prompt().invoke(
-<<<<<<< HEAD
-        {"text": text, "claim_verificaton": claim_verificaton_list}
-=======
         {"text": text, "claim_verificaton": claim_verificaton_list[0]}
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
     )
 
     return llm.invoke(final_prompt_).content

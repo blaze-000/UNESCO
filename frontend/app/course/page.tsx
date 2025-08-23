@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-"use client"
-import { motion } from "motion/react"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Button } from "@/components/ui/button"
-import { Play, FileText, CheckCircle, Clock, Users } from "lucide-react"
-import Link from "next/link"
-=======
 "use client";
 import { motion } from "motion/react";
 import {
@@ -17,22 +9,12 @@ import {
 import { Button } from "@/components/ui/button";
 import { Play, FileText, CheckCircle, Clock, Users } from "lucide-react";
 import Link from "next/link";
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
 
 export default function CoursePage() {
   const modules = [
     {
       id: "module-1",
       title: "Introduction to Media Literacy",
-<<<<<<< HEAD
-      description: "Understand the fundamentals of media literacy and its importance in the digital age",
-      duration: "45 min",
-      items: [
-        { id: "1-1", type: "video", title: "What is Media Literacy?", duration: "12 min" },
-        { id: "1-2", type: "text", title: "The Digital Information Ecosystem", duration: "8 min read" },
-        { id: "1-3", type: "mcq", title: "Knowledge Check: Media Literacy Basics", questions: 5 },
-        { id: "1-4", type: "video", title: "Case Studies: Media Literacy in Action", duration: "15 min" },
-=======
       description:
         "Understand the fundamentals of media literacy and its importance in the digital age",
       duration: "45 min",
@@ -61,23 +43,12 @@ export default function CoursePage() {
           title: "Case Studies: Media Literacy in Action",
           duration: "15 min",
         },
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
         { id: "1-5", type: "mcq", title: "Module 1 Assessment", questions: 10 },
       ],
     },
     {
       id: "module-2",
       title: "Critical Thinking & Information Evaluation",
-<<<<<<< HEAD
-      description: "Learn to analyze sources, identify bias, and verify information authenticity",
-      duration: "60 min",
-      items: [
-        { id: "2-1", type: "video", title: "Source Credibility Framework", duration: "18 min" },
-        { id: "2-2", type: "text", title: "Identifying Misinformation Patterns", duration: "12 min read" },
-        { id: "2-3", type: "video", title: "Fact-Checking Tools & Techniques", duration: "22 min" },
-        { id: "2-4", type: "mcq", title: "Practice: Evaluating Sources", questions: 8 },
-        { id: "2-5", type: "text", title: "Bias Recognition Guide", duration: "10 min read" },
-=======
       description:
         "Learn to analyze sources, identify bias, and verify information authenticity",
       duration: "60 min",
@@ -112,23 +83,12 @@ export default function CoursePage() {
           title: "Bias Recognition Guide",
           duration: "10 min read",
         },
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
         { id: "2-6", type: "mcq", title: "Module 2 Assessment", questions: 12 },
       ],
     },
     {
       id: "module-3",
       title: "Digital Citizenship & Ethics",
-<<<<<<< HEAD
-      description: "Explore responsible online behavior and ethical information sharing",
-      duration: "50 min",
-      items: [
-        { id: "3-1", type: "video", title: "Digital Rights and Responsibilities", duration: "16 min" },
-        { id: "3-2", type: "text", title: "Privacy in the Digital Age", duration: "14 min read" },
-        { id: "3-3", type: "video", title: "Cyberbullying Prevention", duration: "11 min" },
-        { id: "3-4", type: "mcq", title: "Ethics Scenarios Quiz", questions: 6 },
-        { id: "3-5", type: "text", title: "Building Positive Online Communities", duration: "9 min read" },
-=======
       description:
         "Explore responsible online behavior and ethical information sharing",
       duration: "50 min",
@@ -163,7 +123,6 @@ export default function CoursePage() {
           title: "Building Positive Online Communities",
           duration: "9 min read",
         },
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
       ],
     },
     {
@@ -172,17 +131,6 @@ export default function CoursePage() {
       description: "Design and develop your own media literacy solutions",
       duration: "90 min",
       items: [
-<<<<<<< HEAD
-        { id: "4-1", type: "video", title: "Design Thinking for MIL Solutions", duration: "25 min" },
-        { id: "4-2", type: "text", title: "Project Planning Framework", duration: "15 min read" },
-        { id: "4-3", type: "video", title: "Prototype Development", duration: "30 min" },
-        { id: "4-4", type: "mcq", title: "Solution Validation Quiz", questions: 8 },
-        { id: "4-5", type: "text", title: "Impact Measurement Guide", duration: "12 min read" },
-        { id: "4-6", type: "video", title: "Presenting Your Solution", duration: "18 min" },
-      ],
-    },
-  ]
-=======
         {
           id: "4-1",
           type: "video",
@@ -222,58 +170,10 @@ export default function CoursePage() {
       ],
     },
   ];
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
 
   const getItemIcon = (type: string) => {
     switch (type) {
       case "video":
-<<<<<<< HEAD
-        return <Play className="w-4 h-4 text-red-500" />
-      case "text":
-        return <FileText className="w-4 h-4 text-blue-500" />
-      case "mcq":
-        return <CheckCircle className="w-4 h-4 text-green-500" />
-      default:
-        return <FileText className="w-4 h-4 text-gray-500" />
-    }
-  }
-
-  const getItemMeta = (item: any) => {
-    if (item.duration) return item.duration
-    if (item.questions) return `${item.questions} questions`
-    return ""
-  }
-
-  return (
-    <div className="min-h-screen bg-white">
-      {/* Navigation */}
-      <nav className="border-b border-gray-200 bg-white sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-2">
-              <Link href="/" className="flex items-center gap-2">
-                <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">U</span>
-                </div>
-                <span className="font-bold text-lg text-gray-900">UNESCO Youth Hackathon</span>
-              </Link>
-            </div>
-            <div className="hidden md:flex items-center gap-6">
-              <Link href="/" className="text-gray-600 hover:text-red-500 transition-colors">
-                Home
-              </Link>
-              <Link href="/course" className="text-red-500 font-medium">
-                Courses
-              </Link>
-              <Link href="/chats" className="text-gray-600 hover:text-red-500 transition-colors">
-                Chats
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-=======
         return <Play className="w-4 h-4 text-red-500" />;
       case "text":
         return <FileText className="w-4 h-4 text-blue-500" />;
@@ -292,7 +192,6 @@ export default function CoursePage() {
 
   return (
     <div className="min-h-screen bg-white">
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -300,18 +199,12 @@ export default function CoursePage() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-<<<<<<< HEAD
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Media & Information Literacy Course</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-            Master the skills needed to navigate the digital information landscape and create impactful solutions
-=======
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Media & Information Literacy Course
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
             Master the skills needed to navigate the digital information
             landscape and create impactful solutions
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
           </p>
 
           <div className="flex items-center justify-center space-x-8 text-sm text-gray-500">
@@ -344,17 +237,12 @@ export default function CoursePage() {
                       {index + 1}
                     </div>
                     <div className="flex-1">
-<<<<<<< HEAD
-                      <h3 className="font-semibold text-gray-900 mb-2">{module.title}</h3>
-                      <p className="text-gray-600 text-sm mb-2">{module.description}</p>
-=======
                       <h3 className="font-semibold text-gray-900 mb-2">
                         {module.title}
                       </h3>
                       <p className="text-gray-600 text-sm mb-2">
                         {module.description}
                       </p>
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
                       <div className="flex items-center space-x-4 text-xs text-gray-500">
                         <span className="flex items-center space-x-1">
                           <Clock className="w-3 h-3" />
@@ -367,15 +255,9 @@ export default function CoursePage() {
                 </AccordionTrigger>
                 <AccordionContent className="px-6 pb-4">
                   <div className="space-y-2">
-<<<<<<< HEAD
-                    {module.items.map((item) => (
-                      <motion.div key={item.id}>
-                        <Link href={`/course-play/${item.id}`}>
-=======
                     {module.items.map((item, itemIdx) => (
                       <motion.div key={item.id}>
                         <Link href={`/course-play?m=${index}&i=${itemIdx}`}>
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
                           <motion.button
                             className="w-full flex items-center space-x-3 p-3 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors text-left group"
                             whileHover={{ x: 5 }}
@@ -386,13 +268,9 @@ export default function CoursePage() {
                               <p className="font-medium text-gray-900 group-hover:text-red-600 transition-colors">
                                 {item.title}
                               </p>
-<<<<<<< HEAD
-                              <p className="text-sm text-gray-500">{getItemMeta(item)}</p>
-=======
                               <p className="text-sm text-gray-500">
                                 {getItemMeta(item)}
                               </p>
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
                             </div>
                           </motion.button>
                         </Link>
@@ -421,9 +299,5 @@ export default function CoursePage() {
         </motion.div>
       </div>
     </div>
-<<<<<<< HEAD
-  )
-=======
   );
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
 }

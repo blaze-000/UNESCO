@@ -135,10 +135,7 @@ Each document has a `content` and a `source`.
 If the claim is supported by the documents, mark it as "True". 
 If it is contradicted, mark it as "False". 
 If the documents do not give enough information, mark it as "Unverifiable".
-<<<<<<< HEAD
-=======
 Please return 1 line explanation of the claim and the supporting documents.
->>>>>>> 4b6ac2c21804f83c38330b231a65eaaa3a72f933
 
 Return your answer in strict JSON format:
 {format_instruction}
