@@ -300,6 +300,7 @@ function AudioPlayer({ title, content }: AudioPlayerProps) {
               onClick={togglePlay}
               className="w-12 h-12 bg-gray-900 text-white rounded-full flex items-center justify-center hover:bg-gray-800 transition-colors"
               disabled={!content}
+              
             >
               {isPlaying ? (
                 <Pause size={24} />
