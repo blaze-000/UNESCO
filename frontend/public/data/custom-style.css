@@ -1,0 +1,133 @@
+
+        .mainy {
+            --font-family-heading: "Merriweather", Georgia, serif; /* Use Merriweather for headings */
+            --font-family-base: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif; /* Use Open Sans for body */
+            --color-text-primary: rgba(0, 0, 0, 0.84);
+            --color-text-secondary: rgba(0, 0, 0, 0.54);
+            --color-divider: rgba(0, 0, 0, 0.1);
+        }
+
+        .text-body {
+            font-family: var(--font-family-base);
+            color: var(--color-text-primary);
+            line-height: 1.58;
+            font-size: 18px; /* Base font size similar to Medium */
+            
+            background-color: #fff;
+        }
+
+        .document-body {
+            max-width: var(--page-max-width);
+            margin: 0 auto;
+             /* Add top and bottom padding */
+        }
+
+        /* --- Header Styling --- */
+        .module-header {
+            text-align: center;
+            margin: 40px 0 60px 0; /* Increased bottom margin */
+        }
+
+        .module-title {
+            font-family: var(--font-family-heading); /* Use Merriweather */
+            font-size: 15px; /* Smaller, uppercase like Medium section titles */
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 0 10px 0;
+        }
+
+        .chapter-title {
+            font-family: var(--font-family-heading); /* Use Merriweather */
+            font-size: 36px; /* Large title like Medium */
+            font-weight: 800; /* Extra bold */
+            line-height: 1.1;
+            margin: 0;
+            color: #000;
+        }
+
+        /* --- Content Headings --- */
+        .chapter-heading {
+            font-family: var(--font-family-heading); /* Use Merriweather */
+            font-size: 28px; /* Large heading */
+            font-weight: 800;
+            line-height: 1.15;
+            margin: 60px 0 30px 0; /* Spacing above/below */
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--color-divider);
+            color: #000;
+        }
+
+        .section-heading {
+            font-family: var(--font-family-heading); /* Use Merriweather */
+            font-size: 24px; /* Medium heading */
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 40px 0 20px 0;
+            color: #000;
+        }
+
+        .subsection-heading {
+            font-family: var(--font-family-heading); /* Use Merriweather */
+            font-size: 20px; /* Smaller subheading */
+            font-weight: 700;
+            line-height: 1.3;
+            margin: 30px 0 15px 0;
+            color: #000;
+        }
+
+        /* --- Paragraphs & Lists --- */
+        .paragraph {
+            margin: 24px 0; /* Generous paragraph spacing */
+            text-align: left; /* Medium aligns left */
+        }
+
+        ul.list, ol.list {
+            margin: 24px 0;
+            padding-left: 24px; /* Standard list padding */
+        }
+
+        ul.list {
+            list-style-type: disc;
+        }
+
+        ol.list {
+            list-style-type: decimal;
+        }
+
+        .list-item {
+            margin: 12px 0; /* Space between list items */
+        }
+
+        /* --- Links --- */
+        .link {
+            color: #0277BD; /* Medium blue */
+            text-decoration: none;
+            border-bottom: 1px solid rgba(2, 119, 189, 0.3);
+        }
+
+        .link:hover {
+            color: #01579B; /* Darker blue on hover */
+            border-bottom: 1px solid rgba(2, 119, 189, 0.8);
+        }
+
+        /* --- Page Break (for print, keep simple visually) --- */
+        .page-break {
+            /* For screen, just add extra space */
+            margin-top: 80px;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+            }
+            .document-body {
+                padding: 0.5in;
+            }
+            .page-break {
+                page-break-before: always;
+                margin-top: 0;
+            }
+        }
+  
