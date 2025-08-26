@@ -94,7 +94,7 @@ export default function HomePage() {
                   className="bg-red-500 hover:bg-red-600 text-white px-8 py-6 text-lg rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 group"
                   size="lg"
                 >
-                  <Link href="/course">
+                  <Link href="/all-courses">
                     Start Course
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Link>

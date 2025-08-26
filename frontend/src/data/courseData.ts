@@ -244,7 +244,7 @@ export const modules = [
   },
     {
     id: "module-5",
-    title: "Toolkit for Being Safe from Deceptive Marketing",
+    title: "Becoming a Global Ad Detective",
     description: "Design and develop your own media literacy solutions",
     duration: "90 min",
     items: [
@@ -258,35 +258,22 @@ export const modules = [
       {
         id: "audio-5-1",
         type: "audio",
-        title: "Podcast: Toolkit for Being Safe from Deceptive Marketing",
+        title: "Podcast: Becoming a Global Ad Detective",
         duration: "10 min",
         src: "/audios/5-1-1.m4a",
         coverImage: "/images/audio-5-1-1.png",
         artist: ""
       },
       {
-        id: "text-4-1",
+        id: "text-5-1",
         type: "text",
-        title: "RED FLAGS: Quick Signs of a Deceptive Ad",
+        title: "The Future of Deceptive Marketing: AI & Deepfakes",
         duration: "15 min read",
-        src: "/data/module-4/text-4-1.html",
+        src: "/data/module-5/text-5-1.html",
       },
-       {
-        id: "text-4-2",
-        type: "text",
-        title: "The CED Method: Claim–Evidence–Disclosure",
-        duration: "15 min read",
-        src: "/data/module-4/text-4-2.html",
-      },
+      
       {
-        id: "video-4-3",
-        type: "video",
-        title: "Prototype Development",
-        duration: "30 min",
-        src: "/videos/prototype.mp4",
-      },
-      {
-        id: "quiz-4-4",
+        id: "quiz-5-1",
         type: "quiz",
         title: "Solution Validation Quiz",
         questions: "8",
