@@ -15,7 +15,7 @@ export const modules = [
         src: "/videos/source-credibility.mp4",
       },
       {
-        id: "audio-1-2",
+        id: "audio-1-1",
         type: "audio",
         title: "Podcast: Evaluating Online Sources",
         duration: "10 min",
@@ -29,15 +29,6 @@ export const modules = [
         title: "Identifying Misinformation Patterns",
         duration: "12 min read",
         src: "src/data/module-1/text-1-1.html",
-      },
-      {
-        id: "audio-1-3",
-        type: "audio",
-        title: "Lecture: Bias in Digital Media",
-        duration: "8 min",
-        src: "/audios/bias-in-media.mp3",
-        coverImage: "/images/audio-1-1-1.png",
-        artist: "Prof. Alan Wright",
       },
       {
         id: "video-2-3",
@@ -82,6 +73,15 @@ export const modules = [
         src: "/videos/media-literacy.mp4",
       },
       {
+        id: "audio-2-1",
+        type: "audio",
+        title: "Podcast: Evaluating Online Sources",
+        duration: "10 min",
+        src: "/audios/2-1-1.m4a",
+        coverImage: "/images/audio-2-1-1.png",
+        artist: ""
+      },
+      {
         id: "text-2-1",
         type: "text",
         title:
@@ -117,13 +117,6 @@ export const modules = [
         questions: "5",
       },
       {
-        id: "video-2-2",
-        type: "video",
-        title: "Case Studies: Media Literacy in Action",
-        duration: "15 min",
-        src: "/videos/case-studies.mp4",
-      },
-      {
         id: "quiz-2-5",
         type: "quiz",
         title: "Module 1 Assessment",
@@ -133,7 +126,7 @@ export const modules = [
   },
   {
     id: "module-3",
-    title: "Digital Citizenship & Ethics",
+    title: "How Deceptive Marketing Differs Across the Globe",
     description:
       "Explore responsible online behavior and ethical information sharing",
     duration: "50 min",
@@ -148,16 +141,23 @@ export const modules = [
       {
         id: "text-3-1",
         type: "text",
-        title: "How Deceptive Marketing Differs Across the Globe",
+        title: "The Global Face of Deception",
         duration: "14 min read",
         src: "/data/module-3/text-3-1.html",
       },
       {
-        id: "video-3-3",
-        type: "video",
-        title: "Cyberbullying Prevention",
-        duration: "11 min",
-        src: "/videos/cyberbullying.mp4",
+        id: "text-3-2",
+        type: "text",
+        title: "Asia – The Allure of “Natural”",
+        duration: "14 min read",
+        src: "/data/module-3/text-3-2.html",
+      },
+      {
+        id: "text-3-3",
+        type: "text",
+        title: "Africa – The Promise of Miracles",
+        duration: "14 min read",
+        src: "/data/module-3/text-3-3.html",
       },
       {
         id: "quiz-3-4",
