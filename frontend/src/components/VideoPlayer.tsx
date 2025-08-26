@@ -20,7 +20,7 @@ export default function VideoPlayer({ src, title }: VideoPlayerProps) {
         <video
           src={src}
           controls
-          className="w-full h-[400px] md:h-[500px] bg-black rounded-lg shadow-md"
+          className="w-full max-w-4xl mx-auto h-[400px] md:h-[500px] bg-black rounded-lg shadow-md"
         />
       </div>
 

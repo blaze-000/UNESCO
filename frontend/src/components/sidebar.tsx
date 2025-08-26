@@ -19,7 +19,7 @@ export default function Sidebar({ moduleId }: { moduleId: string }) {
   return (
     <div
       className={`${
-        collapsed ? "w-18 border-r h-full mr-62" : "w-80 h-full"
+        collapsed ? "w-18 border-r h-full" : "w-80 h-full"
       } flex flex-col border-r `}
     >
       {/* Header row */}
