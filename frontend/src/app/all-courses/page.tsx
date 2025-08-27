@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Play, FileText,  Clock, CheckCircle2, AudioWaveformIcon } from "lucide-react";
+import { Play, FileText,  Clock,  AudioWaveformIcon, Timer, BookOpenCheck } from "lucide-react";
 import Link from "next/link";
 import { modules } from "@/data/courseData";
 
@@ -19,7 +19,9 @@ export default function CoursePage() {
       case "text":
         return <FileText className="w-5 h-5 text-blue-500" />;
       case "quiz":
-        return <CheckCircle2 className="w-5 h-5 text-orange-500" />;
+        return <Timer className="w-5 h-5 text-orange-500" />;
+      case "exercise":
+        return <BookOpenCheck className="w-5 h-5 text-orange-500" />;
         case "audio":
         return <AudioWaveformIcon className="w-5 h-5 text-green-500" />;
       default:
@@ -28,10 +30,10 @@ export default function CoursePage() {
   };
 
   const getItemMeta = (item: any) => {
-    if (item.duration) return item.duration;
-    if (item.questions) return `${item.questions} questions`;
-    return "";
-  };
+  if (item.duration) return item.duration;
+  if (item.type === "quiz" && item.questions) return `${item.questions.length} questions`;
+  return "";
+};
 
   return (
     <div className="min-h-screen bg-white w-full">

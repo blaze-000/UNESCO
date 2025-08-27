@@ -5,6 +5,7 @@ import TextContent from "@/components/TextContent";
 import VideoPlayer from "@/components/VideoPlayer";
 import AudioPlayer from "@/components/AudioPlayer";
 import { modules } from "@/data/courseData";
+import  Quiz  from "@/components/Quiz";
 
 export default function ItemPage({
   params,
@@ -36,12 +37,26 @@ export default function ItemPage({
   const components = {
     video: () => <VideoPlayer src={item.src ?? ""} title={item.title} />,
     text: () => <TextContent htmlContent={htmlContent} />,
+    exercise: () => ( <Quiz
+        title={item.title}
+        questions={Array.isArray(item.questions) ? item.questions : []}
+        moduleId={moduleId}
+        itemId={itemId}
+      />
+    ),
+    quiz: () => (
+      <Quiz
+        title={item.title}
+        questions={Array.isArray(item.questions) ? item.questions : []}
+        moduleId={moduleId}
+        itemId={itemId}
+      />
+    ),
     audio: () => (
       <AudioPlayer
         content={item.src ?? ""}
         title={item.title}
         coverImage={item.coverImage}
-        artist={item.artist}
       />
     ),
   } as const;

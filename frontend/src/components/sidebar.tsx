@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import { modules } from "@/data/courseData";
 import {
+  BookOpenCheck,
   CheckCircle,
   CheckCircle2,
   ChevronLeft,
@@ -41,6 +42,8 @@ export default function Sidebar() {
         return <Play className="w-5 h-5 text-red-500" />;
       case "text":
         return <FileText className="w-5 h-5 text-blue-500" />;
+         case "exercise":
+        return <BookOpenCheck className="w-5 h-5 text-orange-500" />;
       case "quiz":
         return <CheckCircle2 className="w-5 h-5 text-orange-500" />;
       case "audio":
