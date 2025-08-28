@@ -185,7 +185,7 @@ export default function AudioPlayer({
           <Image
             src={coverImage || "/default-cover.jpg"}
             alt={title}
-            className="w-24 h-24 rounded-xl object-cover flex-shrink-0 border border-gray-200"
+            className="w-36 h-36 rounded-xl object-cover flex-shrink-0 border border-gray-200"
             width={96}
             height={96}
           />
