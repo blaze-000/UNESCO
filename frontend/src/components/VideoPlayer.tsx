@@ -52,17 +52,9 @@ export default function VideoPlayer({ src, title }: VideoPlayerProps) {
         {!collapsed ? (
           <div className="flex-1 p-4 overflow-y-auto">
             <ul className="space-y-3">
-              {Array.from({ length: 30 }).map((_, i) => (
-                <li
-                  key={i}
-                  className="p-3 border rounded-lg hover:bg-gray-50 cursor-pointer"
-                >
-                  <p className="font-medium text-sm">
-                    Recommended Video {i + 1}
-                  </p>
-                  <span className="text-xs text-gray-500">5:20 mins</span>
-                </li>
-              ))}
+              <span>Transcript here (AI Generated)</span>
+
+              {/* Generate Transcript using AI, when Video is Plublished */}
             </ul>
           </div>
         ) : (

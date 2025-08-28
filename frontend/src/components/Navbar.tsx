@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -19,10 +20,15 @@ export default function Header() {
           {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">U</span>
+              <Image 
+              src="/images/logo.png"
+              alt="logo"
+              width={64}
+              height={64}
+              />
             </div>
             <span className="font-bold text-lg text-gray-900">
-              UNESCO Youth Hackathon
+              Beyond the Ads
             </span>
           </div>
 
