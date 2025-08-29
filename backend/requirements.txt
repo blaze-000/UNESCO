@@ -1,9 +1,8 @@
-langchain==0.1.0  # or the latest stable version
-langchain-groq==0.3.7
-openai==1.2.0
 flask==3.0.0
 flask-cors==4.0.0
 python-dotenv==1.0.0
+langchain==0.0.325
+openai==1.2.0
 requests==2.31.0
 beautifulsoup4==4.12.2
 google-api-python-client==2.107.0
