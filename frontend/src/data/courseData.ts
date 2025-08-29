@@ -11,7 +11,10 @@ export const modules = [
         type: "video",
         title: "Source Credibility Framework",
         duration: "18 min",
-        src: "/videos/source-credibility.mp4",
+        src: {
+          english: "https://www.youtube.com/embed/YOUR_ENGLISH_VIDEO_ID",
+          nepali: "https://www.youtube.com/embed/YOUR_NEPALI_VIDEO_ID",
+        },
       },
       {
         id: "audio-1-1",
@@ -246,7 +249,10 @@ export const modules = [
         type: "video",
         title: "What is Media Literacy?",
         duration: "12 min",
-        src: "/videos/media-literacy.mp4",
+        src: {
+          english: "https://www.youtube.com/embed/YOUR_ENGLISH_VIDEO_ID_2",
+          nepali: "https://www.youtube.com/embed/YOUR_NEPALI_VIDEO_ID_2",
+        },
       },
       {
         id: "audio-2-1",
@@ -526,7 +532,10 @@ export const modules = [
         type: "video",
         title: "Digital Rights and Responsibilities",
         duration: "16 min",
-        src: "/videos/digital-rights.mp4",
+        src: {
+          english: "https://www.youtube.com/embed/pDwdcfx4CWo",
+          nepali: "https://www.youtube.com/embed/ZPS0vQrkT30",
+        },
       },
       {
         id: "audio-3-1",
@@ -545,7 +554,7 @@ export const modules = [
         src: "/data/module-3/text-3-1.html",
       },
       {
-        id: "quiz-3-2",
+        id: "quiz-3-1",
         type: "quiz",
         title: "Quiz: The Global Face of Deception",
         questions: [
@@ -886,7 +895,10 @@ export const modules = [
         type: "video",
         title: "Design Thinking for MIL Solutions",
         duration: "25 min",
-        src: "/videos/design-thinking.mp4",
+        src: {
+          english: "https://www.youtube.com/embed/RgD3xWRV7oY",
+          nepali: "https://www.youtube.com/embed/-HZK1yYfX-M",
+        },
       },
       {
         id: "audio-4-1",
@@ -975,13 +987,7 @@ export const modules = [
           },
         ],
       },
-      {
-        id: "video-4-3",
-        type: "video",
-        title: "Prototype Development",
-        duration: "30 min",
-        src: "/videos/prototype.mp4",
-      },
+      
       {
         id: "exercise-4",
         type: "exercise",
@@ -1081,7 +1087,10 @@ export const modules = [
         type: "video",
         title: "Design Thinking for MIL Solutions",
         duration: "25 min",
-        src: "/videos/design-thinking.mp4",
+        src: {
+          english: "https://www.youtube.com/embed/VOy72oAyoRo",
+          nepali: "https://www.youtube.com/embed/FYdJAysdQro",
+        },
       },
       {
         id: "audio-5-1",
