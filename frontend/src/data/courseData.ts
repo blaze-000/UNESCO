@@ -3,7 +3,7 @@ export const modules = [
     id: "module-1",
     title: "Why Deceptive Marketing Matters?",
     description:
-      "Learn to analyze sources, identify bias, and verify information authenticity",
+      "Explore the global impact of deceptive marketing, understand psychological manipulation tactics, and learn how UNESCO addresses digital ethics and consumer protection worldwide",
     duration: "60 min",
     items: [
       {
@@ -45,6 +45,8 @@ export const modules = [
             ],
             correctAnswer:
               "Advertising that misleads consumers with false, incomplete, or exaggerated claims",
+            explanation:
+              "According to the American Marketing Association, deceptive advertising is 'advertising intended to mislead consumers by falsely making claims, by failure to make full disclosure, or by both.' This includes overstating benefits, hiding critical details, or using manipulative tactics to create false impressions of value or quality.",
           },
           {
             question: "Why is deceptive marketing considered a global issue?",
@@ -56,6 +58,8 @@ export const modules = [
             ],
             correctAnswer:
               "It spreads easily through digital platforms and targets vulnerable groups",
+            explanation:
+              "Deceptive marketing is a global concern due to digital proliferation (online platforms reaching vast audiences), cross-border challenges (making enforcement complex), and targeting of vulnerable populations like children, elderly, or those with limited literacy. Globally, it costs consumers an estimated $50 billion annually with 80% spreading through digital platforms.",
           },
         ],
       },
@@ -83,6 +87,8 @@ export const modules = [
               "Confirmation Bias",
             ],
             correctAnswer: "Scarcity Effect",
+            explanation:
+              "The scarcity effect is a psychological phenomenon where people place higher value on things that are scarce. Marketers create urgency by highlighting limited availability with countdown timers or 'limited-time offers,' prompting consumers to act quickly. This exploits our natural tendency to fear missing out on opportunities.",
           },
           {
             question:
@@ -95,6 +101,8 @@ export const modules = [
             ],
             correctAnswer:
               "By encouraging people to copy others' choices through reviews and testimonials",
+            explanation:
+              "Social proof is the tendency to look to others for guidance when uncertain. Marketers leverage this by showcasing customer reviews, testimonials, or purchase counts. However, this becomes deceptive when reviews are fake or when celebrities endorse products they never used, exploiting our natural desire to follow others' choices.",
           },
         ],
       },
@@ -121,6 +129,8 @@ export const modules = [
             ],
             correctAnswer:
               "Adopted the Recommendation on the Ethics of Artificial Intelligence",
+            explanation:
+              "In 2021, UNESCO adopted the Recommendation on the Ethics of Artificial Intelligence, a groundbreaking framework endorsed by 193 countries. This recommendation emphasizes transparency, accountability, and inclusivity in AI development, aiming to ensure AI technologies benefit humanity while mitigating potential harms.",
           },
           {
             question:
@@ -133,6 +143,8 @@ export const modules = [
             ],
             correctAnswer:
               "By integrating MIL into education to support SDG 4 and SDG 16",
+            explanation:
+              "UNESCO connects Media and Information Literacy (MIL) to sustainable development by integrating it into educational frameworks to support SDG 4 (inclusive and equitable quality education) and SDG 16 (peaceful and inclusive societies). This helps build informed, resilient societies capable of addressing global challenges.",
           },
         ],
       },
@@ -151,6 +163,8 @@ export const modules = [
               "$5 trillion",
             ],
             correctAnswer: "$50 billion",
+            explanation:
+              "According to the course material, deceptive advertising costs consumers an estimated $50 billion globally every year, with 80% of these ads spreading through digital platforms. This massive financial impact highlights the scale of the deceptive marketing problem worldwide.",
           },
           {
             question:
@@ -162,6 +176,8 @@ export const modules = [
               "Doctors",
             ],
             correctAnswer: "Students",
+            explanation:
+              "Students are particularly vulnerable to deceptive marketing in financial products like credit cards. They are often lured with promises of low interest rates and high rewards, but the fine print reveals hidden fees, high-interest rates, or penalties for late payments, leading to debt traps that affect their financial stability and credit scores.",
           },
           {
             question:
@@ -173,6 +189,8 @@ export const modules = [
               "Confirmation Bias",
             ],
             correctAnswer: "Scarcity Effect",
+            explanation:
+              "The scarcity effect is a psychological phenomenon where people place higher value on things that are scarce. This cognitive bias makes consumers more likely to purchase products when they believe availability is limited, even if the scarcity is artificially created by marketers.",
           },
           {
             question: "Social proof in marketing is commonly created through:",
@@ -183,6 +201,8 @@ export const modules = [
               "Discount coupons",
             ],
             correctAnswer: "Fake reviews or testimonials",
+            explanation:
+              "Social proof in marketing is commonly created through fake reviews or testimonials. Marketers exploit our tendency to follow others' choices by fabricating positive customer feedback, which can be particularly deceptive when these reviews are completely false or when celebrities endorse products they never actually used.",
           },
           {
             question:
@@ -194,6 +214,8 @@ export const modules = [
               "AI Literacy Toolkit",
             ],
             correctAnswer: "Readiness Assessment Methodology (RAM)",
+            explanation:
+              "UNESCO developed the Readiness Assessment Methodology (RAM) to help governments evaluate their preparedness to deploy AI responsibly. This tool assists member states in implementing ethical AI guidelines and fosters a global standard for ethical AI practices.",
           },
           {
             question:
@@ -205,6 +227,8 @@ export const modules = [
               "SDG 7 and SDG 12",
             ],
             correctAnswer: "SDG 4 and SDG 16",
+            explanation:
+              "UNESCO's integration of Media and Information Literacy into education directly supports SDG 4 (inclusive and equitable quality education) and SDG 16 (peaceful and inclusive societies). This approach helps build informed, resilient societies capable of addressing global challenges through education and critical thinking.",
           },
         ],
       },
@@ -214,7 +238,7 @@ export const modules = [
     id: "module-2",
     title: "The Core tactics of Deceptive Marketing",
     description:
-      "Understand the fundamentals of media literacy and its importance in the digital age",
+      "Master the identification of fake discounts, hidden fees, false urgency, and scarcity tactics used by deceptive marketers to manipulate consumer behavior",
     duration: "45 min",
     items: [
       {
@@ -257,6 +281,8 @@ export const modules = [
             ],
             correctAnswer:
               "Showing a higher 'original price' before applying a discount",
+            explanation:
+              "Fake discount strategies involve advertising a product as being on sale when it's actually sold at its usual price. Companies artificially inflate the 'original price' to make the current price appear as a discount, as seen in the Woolworths case where they temporarily raised prices to create fake discount promotions.",
           },
           {
             question:
@@ -269,6 +295,8 @@ export const modules = [
             ],
             correctAnswer:
               "To create urgency and push immediate purchase decisions",
+            explanation:
+              "False scarcity tactics like 'Only 2 left in stock' are used to create artificial urgency and pressure consumers into making immediate purchase decisions. These tactics exploit the scarcity effect, making people believe they'll miss out if they don't act quickly, even when the scarcity is completely fabricated.",
           },
         ],
       },
@@ -295,6 +323,8 @@ export const modules = [
             ],
             correctAnswer:
               "Scammers using AI to generate videos of celebrities promoting products",
+            explanation:
+              "Fake celebrity endorsements often involve using AI technology to create deepfake videos of celebrities promoting products they never actually used or endorsed. This is particularly deceptive because it uses advanced technology to create convincing but completely false endorsements.",
           },
           {
             question:
@@ -307,6 +337,8 @@ export const modules = [
             ],
             correctAnswer:
               "Verify endorsements through official sources and check for transparency tags like #ad",
+            explanation:
+              "The safest way to spot fake reviews or endorsements is to verify them through official sources and look for transparency tags like #ad or #sponsored. This helps identify legitimate partnerships and avoid falling for fabricated endorsements or reviews.",
           },
         ],
       },
@@ -332,6 +364,8 @@ export const modules = [
             ],
             correctAnswer:
               "To present products as more eco-friendly than they actually are",
+            explanation:
+              "Greenwashing is the practice of making exaggerated or false environmental claims to make products appear more eco-friendly than they actually are. Companies use this tactic to attract environmentally conscious consumers without making genuine sustainability improvements.",
           },
           {
             question: "Which of the following is a clear sign of greenwashing?",
@@ -343,6 +377,8 @@ export const modules = [
             ],
             correctAnswer:
               "A product description includes vague terms like 'natural' or 'eco-friendly' without proof",
+            explanation:
+              "A clear sign of greenwashing is when companies use vague environmental terms like 'natural' or 'eco-friendly' without providing any proof or certification. These terms lack specific meaning and are often used to mislead consumers about a product's environmental impact.",
           },
         ],
       },
@@ -369,6 +405,8 @@ export const modules = [
             ],
             correctAnswer:
               "Automatically adding extra services through pre-checked boxes",
+            explanation:
+              "Dark patterns are manipulative design choices that trick users into making decisions they wouldn't otherwise make. Pre-checked boxes that automatically add extra services or subscriptions are a common dark pattern, as they rely on users not noticing the hidden charges.",
           },
           {
             question:
@@ -381,6 +419,8 @@ export const modules = [
             ],
             correctAnswer:
               "Double-check carts, read terms carefully, and look for hidden options",
+            explanation:
+              "To protect against dark patterns, users should double-check their shopping carts, read terms and conditions carefully, and look for hidden options or pre-checked boxes. This vigilance helps identify manipulative design choices before making purchases.",
           },
         ],
       },
@@ -399,6 +439,8 @@ export const modules = [
             ],
             correctAnswer:
               "A product being sold at its usual price but advertised as on sale",
+            explanation:
+              "A fake discount occurs when companies advertise products as being on sale when they're actually sold at their usual price. This tactic artificially inflates the 'original price' to make the current price appear as a discount, misleading consumers about the actual value.",
           },
           {
             question:
@@ -411,6 +453,8 @@ export const modules = [
             ],
             correctAnswer:
               "Showing 'Only 2 left in stock' even when stock remains the same",
+            explanation:
+              "False scarcity tactics like showing 'Only 2 left in stock' when stock remains unchanged are used to create artificial urgency. This exploits the scarcity effect by making consumers believe they'll miss out if they don't act quickly, even when the scarcity is completely fabricated.",
           },
           {
             question: "How can consumers avoid being misled by hidden fees?",
@@ -422,6 +466,8 @@ export const modules = [
             ],
             correctAnswer:
               "Request a breakdown of all charges and check reviews",
+            explanation:
+              "To avoid hidden fees, consumers should request a complete breakdown of all potential charges and check reviews from other customers. This includes asking about service fees, delivery costs, installation charges, and any additional services that might not be obvious upfront.",
           },
           {
             question:
@@ -434,6 +480,8 @@ export const modules = [
             ],
             correctAnswer:
               "Using AI deepfakes to show celebrities promoting products they never used",
+            explanation:
+              "Fake celebrity endorsements commonly use AI deepfake technology to create convincing videos of celebrities promoting products they never actually used or endorsed. This advanced form of deception is particularly dangerous because it can be very difficult to distinguish from genuine endorsements.",
           },
           {
             question: "What is greenwashing in marketing?",
@@ -445,6 +493,8 @@ export const modules = [
             ],
             correctAnswer:
               "Making exaggerated or false eco-friendly claims to attract consumers",
+            explanation:
+              "Greenwashing is the practice of making exaggerated or false environmental claims to make products appear more eco-friendly than they actually are. Companies use vague terms like 'natural' or 'eco-friendly' without proof to attract environmentally conscious consumers without making genuine sustainability improvements.",
           },
           {
             question:
@@ -457,6 +507,8 @@ export const modules = [
             ],
             correctAnswer:
               "Using confusing buttons and pre-checked boxes to manipulate user choices",
+            explanation:
+              "Dark patterns are manipulative design choices that trick users into making decisions they wouldn't otherwise make. This includes using confusing buttons, pre-checked boxes, or other design elements that manipulate user choices and make it difficult to avoid unwanted purchases or subscriptions.",
           },
         ],
       },
@@ -466,7 +518,7 @@ export const modules = [
     id: "module-3",
     title: "How Deceptive Marketing Differs Across the Globe",
     description:
-      "Explore responsible online behavior and ethical information sharing",
+      "Discover how deceptive marketing adapts to different cultures, targeting local values and beliefs while maintaining the same underlying manipulation tactics worldwide",
     duration: "50 min",
     items: [
       {
@@ -508,6 +560,8 @@ export const modules = [
             ],
             correctAnswer:
               "It adapts its methods depending on local values, fears, and expectations",
+            explanation:
+              "Deceptive marketing takes different forms depending on what people value, what they fear, and what they hope to gain in different cultures. A word that convinces buyers in Asia may not work in Europe, and a trick that draws farmers in Africa may not resonate with city dwellers in Latin America.",
           },
           {
             question:
@@ -520,6 +574,8 @@ export const modules = [
             ],
             correctAnswer:
               "The underlying logic of deception such as half-truths and emotional appeal",
+            explanation:
+              "While the cultural disguise of deceptive marketing changes across regions, the underlying logic of deception remains constant. This includes using half-truths, emotional appeal, or hidden costs - the fundamental tactics of deception stay the same even as they're adapted to different cultural contexts.",
           },
         ],
       },
@@ -546,6 +602,8 @@ export const modules = [
             ],
             correctAnswer:
               "Centuries of cultural belief in nature-based cures give instant credibility to 'herbal' or 'Ayurvedic' claims",
+            explanation:
+              "Asian consumers are particularly vulnerable to deceptive marketing of 'natural' products because centuries of cultural belief in nature-based cures give instant credibility to 'herbal' or 'Ayurvedic' claims. This cultural heritage makes them more likely to trust products labeled as natural or traditional.",
           },
           {
             question:
@@ -558,6 +616,8 @@ export const modules = [
             ],
             correctAnswer:
               "Advertising natural healing benefits without listing related ingredients and making unproven claims of fairness",
+            explanation:
+              "The Fair & Lovely case in Kerala demonstrated deceptive tactics including advertising natural healing benefits without listing related ingredients and making unproven claims of fairness. This exploited cultural beliefs about natural remedies while hiding the actual ingredients and making false promises.",
           },
         ],
       },
@@ -584,6 +644,8 @@ export const modules = [
             ],
             correctAnswer:
               "They rely heavily on informal markets, lack proper regulation, and often trust word of mouth endorsements",
+            explanation:
+              "African farmers are vulnerable to deceptive products because they rely heavily on informal markets, lack proper regulation, and often trust word of mouth endorsements. This combination of factors makes them easy targets for sellers of fake agricultural inputs like 'miracle seeds' or 'magic fertilizers.'",
           },
           {
             question:
@@ -596,6 +658,8 @@ export const modules = [
             ],
             correctAnswer:
               "Using bright labels, technical-sounding words like 'climate proof,' and endorsements by local leaders",
+            explanation:
+              "Sellers of fake agricultural inputs in Africa commonly use bright labels, technical-sounding words like 'climate proof,' and endorsements by local leaders to make their products appear legitimate and trustworthy. These tactics exploit farmers' trust in authority figures and technical expertise.",
           },
         ],
       },
@@ -622,6 +686,8 @@ export const modules = [
             ],
             correctAnswer:
               "Extra charges are hidden in terms and conditions that are confusing or overlooked, making travelers accept them",
+            explanation:
+              "The 'fine print' strategy remains effective in Europe because extra charges are hidden in terms and conditions that are confusing or overlooked, making travelers accept them. Despite strict consumer protection laws, companies exploit consumers' tendency to skip reading complex legal documents.",
           },
           {
             question:
@@ -634,6 +700,8 @@ export const modules = [
             ],
             correctAnswer:
               "Non-transparent fees for cabin luggage, seat reservations, and other 'service' charges",
+            explanation:
+              "Spain's Consumer Rights Ministry fined Ryanair, EasyJet, Vueling, and Volotea in 2024 for non-transparent fees for cabin luggage, seat reservations, and other 'service' charges. This demonstrates how airlines hide additional costs in fine print, making advertised prices misleading.",
           },
         ],
       },
@@ -660,6 +728,8 @@ export const modules = [
             ],
             correctAnswer:
               "Followers treat influencers as trusted friends, and influencers often use local slang and humor to sound authentic",
+            explanation:
+              "Influencer marketing deception works well in Latin America because followers treat influencers as trusted friends, and influencers often use local slang and humor to sound authentic. This personal connection makes followers more likely to trust promotional content without questioning its authenticity.",
           },
           {
             question:
@@ -672,6 +742,8 @@ export const modules = [
             ],
             correctAnswer:
               "Promoting financial services without authorization and failing to declare advertiser ties",
+            explanation:
+              "The Colombian Consumer Protection Authority's investigations revealed influencers promoting financial services without authorization and failing to declare advertiser ties. This lack of transparency about commercial relationships is a key deceptive tactic in influencer marketing.",
           },
         ],
       },
@@ -697,6 +769,8 @@ export const modules = [
               "Clear disclosure of long-term side effects",
             ],
             correctAnswer: "Exaggerated claims and vague expert endorsements",
+            explanation:
+              "This ad uses exaggerated claims ('lose 10 kg in just 2 weeks') and vague expert endorsements ('Doctors recommend') without specifying which doctors or providing any evidence. These are classic deceptive techniques that create false credibility and unrealistic expectations.",
           },
           {
             question:
@@ -708,6 +782,8 @@ export const modules = [
               "FOMO created through celebrity endorsement",
             ],
             correctAnswer: "Artificial urgency and misleading price comparison",
+            explanation:
+              "This is an example of artificial urgency ('limited time only!') combined with misleading price comparison. The 'was $99, now $29' creates a false impression of savings when the price has actually been $29 for months, making it a fake discount tactic.",
           },
         ],
       },
@@ -726,6 +802,8 @@ export const modules = [
               "Transparent pricing",
             ],
             correctAnswer: "Appealing to emotions and cultural values",
+            explanation:
+              "This ad appeals to emotions and cultural values by showing children laughing and playing, creating a positive emotional association with the product. This distracts from the fact that the snack is mostly sugar and salt, using emotional appeal to mask the product's actual nutritional content.",
           },
           {
             question:
@@ -737,6 +815,8 @@ export const modules = [
               "Celebrity endorsement",
             ],
             correctAnswer: "False scarcity to create urgency",
+            explanation:
+              "This is a false scarcity tactic used to create urgency. By claiming 'Only 1 item left in stock' when stock never actually runs out, the website exploits the scarcity effect to pressure consumers into making immediate purchase decisions.",
           },
           {
             question:
@@ -748,6 +828,8 @@ export const modules = [
               "Transparent user feedback",
             ],
             correctAnswer: "Exaggerated social proof",
+            explanation:
+              "This is exaggerated social proof - claiming 'thousands of happy users' and '5 stars' without showing any actual reviews or data. This creates false credibility by suggesting widespread approval without providing any verifiable evidence.",
           },
           {
             question:
@@ -759,6 +841,8 @@ export const modules = [
               "Realistic benefits disclosure",
             ],
             correctAnswer: "Over-simplified and exaggerated claims",
+            explanation:
+              "This ad triggers warning signs of deception through over-simplified and exaggerated claims. Promising to 'lose weight without exercise or diet changes' is unrealistic and oversimplifies the complex process of weight loss, making it a clear example of deceptive marketing.",
           },
           {
             question:
@@ -770,6 +854,8 @@ export const modules = [
               "Price manipulation",
             ],
             correctAnswer: "Vague expert endorsement",
+            explanation:
+              "This is a vague expert endorsement - claiming 'Experts agree' without naming specific experts, providing studies, or citing sources. This creates false credibility by suggesting expert approval without any verifiable evidence or specific details.",
           },
           {
             question:
@@ -781,6 +867,8 @@ export const modules = [
               "Verified promotional campaign",
             ],
             correctAnswer: "Hidden long-term urgency",
+            explanation:
+              "This represents hidden long-term urgency - advertising a 'limited holiday package discount' that has been running unchanged for 6 months. This creates false urgency by suggesting time-limited availability when the offer is actually ongoing, making it a deceptive urgency tactic.",
           },
         ],
       },
@@ -789,7 +877,8 @@ export const modules = [
   {
     id: "module-4",
     title: "Toolkit for Being Safe from Deceptive Marketing",
-    description: "Design and develop your own media literacy solutions",
+    description:
+      "Learn to spot red flags in deceptive ads, understand the CED method for evaluating claims, and develop practical skills to protect yourself from marketing manipulation",
     duration: "90 min",
     items: [
       {
@@ -830,6 +919,8 @@ export const modules = [
               "Exaggerated social proof",
             ],
             correctAnswer: "Hidden fine print",
+            explanation:
+              "This is a hidden fine print red flag. The ad prominently displays 'Only $299!' but hides additional costs (warranty and software bundle) in fine print, making the actual total cost much higher than the advertised price.",
           },
           {
             question:
@@ -866,6 +957,8 @@ export const modules = [
               "Artificial urgency",
             ],
             correctAnswer: "Unverified claims without evidence",
+            explanation:
+              "This highlights the red flag of unverified claims without evidence. The ad claims '70% OFF, Best Battery Life!' but provides no independent tests, studies, or sources to back up these claims, making them unverifiable and potentially deceptive.",
           },
           {
             question:
@@ -877,6 +970,8 @@ export const modules = [
               "Celebrity endorsement",
             ],
             correctAnswer: "Hidden or unreadable disclosures",
+            explanation:
+              "This is a hidden or unreadable disclosures red flag. The product advertises a 'Free Trial' but automatically enrolls customers in a $49 monthly plan with terms that are intentionally made unreadable, hiding the true cost and commitment.",
           },
         ],
       },
@@ -902,6 +997,8 @@ export const modules = [
               "Technical jargon",
             ],
             correctAnswer: "Hidden fine print",
+            explanation:
+              "This is a hidden fine print red flag. The ad prominently promises a 'Free smartphone' but hides in fine print that only shipping is free while the phone itself costs $299, making the 'free' claim misleading.",
           },
           {
             question:
@@ -913,6 +1010,8 @@ export const modules = [
               "Unverified claim",
             ],
             correctAnswer: "Misleading visuals",
+            explanation:
+              "This illustrates a misleading visuals red flag. The billboard ad shows a huge and juicy burger that doesn't match the actual small and flat product, creating false expectations about the product's appearance and quality.",
           },
           {
             question:
@@ -924,6 +1023,8 @@ export const modules = [
               "Social proof manipulation",
             ],
             correctAnswer: "Hidden or unreadable disclosures",
+            explanation:
+              "This is a hidden or unreadable disclosures red flag. The website advertises a 'Risk-Free Trial!' but automatically enrolls customers in a $49/month plan with terms that are intentionally made unreadable, hiding the true cost and commitment.",
           },
           {
             question:
@@ -935,6 +1036,8 @@ export const modules = [
               "Hidden subscription trap",
             ],
             correctAnswer: "Unverified claims without evidence",
+            explanation:
+              "This is an unverified claims without evidence red flag. The ad claims 'Best battery life, up to 70% off!' but provides no third-party testing, studies, or verified sources to back up these claims, making them unverifiable and potentially deceptive.",
           },
           {
             question:
@@ -946,6 +1049,8 @@ export const modules = [
               "Misleading visuals",
             ],
             correctAnswer: "False urgency / scarcity",
+            explanation:
+              "This is a false urgency / scarcity tactic. The website repeatedly shows 'Only 1 item left!' even when stock is unlimited, creating artificial urgency to pressure consumers into making immediate purchase decisions.",
           },
           {
             question:
@@ -957,6 +1062,8 @@ export const modules = [
               "Over-simplified claim",
             ],
             correctAnswer: "Unreadable disclosures",
+            explanation:
+              "This represents an unreadable disclosures red flag. The ad uses tiny footnotes and vague asterisks to hide important information like shipping fees, restocking fees, and region limits, making it difficult for consumers to understand the true costs and restrictions.",
           },
         ],
       },
@@ -965,7 +1072,8 @@ export const modules = [
   {
     id: "module-5",
     title: "Becoming a Global Ad Detective",
-    description: "Design and develop your own media literacy solutions",
+    description:
+      "Explore the future of deceptive marketing with AI and deepfakes, learn to verify media authenticity, and become an active defender against emerging digital scams",
     duration: "90 min",
     items: [
       {
@@ -1007,6 +1115,8 @@ export const modules = [
               "Dark patterns",
             ],
             correctAnswer: "Fake celebrity endorsement",
+            explanation:
+              "This is a fake celebrity endorsement using AI deepfake technology. The video shows Elon Musk endorsing a crypto investment platform, but it's likely a fabricated endorsement created using AI to make the scam appear legitimate and trustworthy.",
           },
           {
             question:
@@ -1018,6 +1128,8 @@ export const modules = [
               "Fake urgency",
             ],
             correctAnswer: "Identity misuse via AI-generated media",
+            explanation:
+              "This highlights the primary risk of identity misuse via AI-generated media. Tom Hanks's likeness is used in a fake dental ad without his consent, demonstrating how AI technology can be used to create convincing fake endorsements that exploit celebrities' identities.",
           },
           {
             question:
@@ -1029,6 +1141,8 @@ export const modules = [
               "Fake testimonials",
             ],
             correctAnswer: "Voice cloning",
+            explanation:
+              "This scam leverages voice cloning technology. An AI-generated voice of a family member is used to pressure you into investing in a fake product, exploiting the trust and emotional connection people have with family members' voices.",
           },
           {
             question:
@@ -1040,6 +1154,8 @@ export const modules = [
               "Spotify",
             ],
             correctAnswer: "Google Reverse Image",
+            explanation:
+              "Google Reverse Image is a tool consumers can use to verify whether an online image or video has been manipulated. It allows users to search for similar images across the web, helping identify if content has been reused or altered from its original source.",
           },
           {
             question:
@@ -1051,6 +1167,8 @@ export const modules = [
               "Ignore product reviews",
             ],
             correctAnswer: "Check if the urgency resets later",
+            explanation:
+              "Checking if the urgency resets later is an effective defense against fake urgency claims. If a 'limited time offer' or countdown timer resets after hitting zero, it reveals the urgency as artificial and deceptive, helping consumers avoid falling for false scarcity tactics.",
           },
           {
             question: "UNESCO’s MIL resources primarily help consumers to:",
@@ -1062,6 +1180,8 @@ export const modules = [
             ],
             correctAnswer:
               "Think critically, verify sources, and share awareness",
+            explanation:
+              "UNESCO's Media and Information Literacy (MIL) resources primarily help consumers to think critically, verify sources, and share awareness. These skills are essential for navigating the digital landscape safely and making informed decisions in the face of deceptive marketing.",
           },
         ],
       },

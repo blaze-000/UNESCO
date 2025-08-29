@@ -10,6 +10,7 @@ interface Question {
   question: string;
   options: string[];
   correctAnswer: string;
+  explanation?: string;
 }
 
 export default function Quiz({
@@ -54,7 +55,9 @@ export default function Quiz({
       if (currentModuleIndex === -1) return;
 
       const currentModule = modules[currentModuleIndex];
-      const currentItemIndex = currentModule.items.findIndex((i) => i.id === itemId);
+      const currentItemIndex = currentModule.items.findIndex(
+        (i) => i.id === itemId
+      );
 
       if (currentItemIndex < currentModule.items.length - 1) {
         // go to next item in same module
@@ -96,9 +99,7 @@ export default function Quiz({
           <p className="text-gray-600 mb-8">
             You scored {score} out of {questions.length}.
           </p>
-          <Button onClick={handleNextQuestion}>
-            Continue to Next Lesson
-          </Button>
+          <Button onClick={handleNextQuestion}>Continue to Next Lesson</Button>
         </div>
       </div>
     );
@@ -135,10 +136,9 @@ export default function Quiz({
                       {String.fromCharCode(65 + index)}
                     </span>
                     <span>{option}</span>
-                    {showResult &&
-                      option === currentQuestion.correctAnswer && (
-                        <CheckCircle className="w-5 h-5 text-green-600 ml-auto" />
-                      )}
+                    {showResult && option === currentQuestion.correctAnswer && (
+                      <CheckCircle className="w-5 h-5 text-green-600 ml-auto" />
+                    )}
                     {showResult &&
                       option === selectedAnswer &&
                       selectedAnswer !== currentQuestion.correctAnswer && (
@@ -178,6 +178,19 @@ export default function Quiz({
                   ? "Great job! You've selected the right answer."
                   : `The correct answer is: ${currentQuestion.correctAnswer}`}
               </p>
+
+              {/* Show explanation only when answer is incorrect */}
+              {!isCorrect && currentQuestion.explanation && (
+                <div className="mt-4">
+                  <h4 className="text-sm font-semibold text-gray-800 mb-2">
+                    Explanation:
+                  </h4>
+                  <p className="text-gray-700 text-sm">
+                    {currentQuestion.explanation}
+                  </p>
+                </div>
+              )}
+
               <Button
                 onClick={handleNextQuestion}
                 className="mt-4 bg-red-500 cursor-pointer hover:bg-red-700"
