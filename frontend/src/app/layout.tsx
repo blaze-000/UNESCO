@@ -46,6 +46,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased ${merriweather.variable} ${openSans.variable} font-merriweather min-h-screen flex flex-col`}
       >
+        <SpeedInsights />
+        <Analytics />
         <TopLoader showSpinner={false} color="#a06d06" height={1.9} />
         <Header />
         <main className="flex-1 pt-0">{children}</main>
