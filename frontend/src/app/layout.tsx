@@ -4,6 +4,7 @@ import TopLoader from "nextjs-toploader";
 import "./globals.css";
 import Header from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
