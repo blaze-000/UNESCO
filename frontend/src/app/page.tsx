@@ -214,11 +214,10 @@ export default function HomePage() {
             {...fadeInUp}
             className="xl:hidden w-full relative bg-gray-50 overflow-hidden py-6"
           >
-            {/* Vertical timeline line */}
-            <div className="absolute left-11 top-0 bottom-0 w-0.5 bg-gray-300 z-0" />
-
             {/* Timeline items */}
-            <div className="relative z-10 max-w-2xl mx-auto px-6">
+            <div className="relative z-10 max-w-2xl mx-auto px-4 sm:px-6">
+              {/* Vertical timeline line - positioned relative to container */}
+              <div className="absolute left-10 md:left-16 top-0 bottom-0 w-0.5 bg-gray-300 z-0" />
               {[
                 { year: "2010s", label: "Fake Reviews", icon: Star },
                 { year: "2015", label: "Clickbait Ads", icon: MessageSquare },
@@ -239,16 +238,16 @@ export default function HomePage() {
                   viewport={{ once: true, amount: 0.6 }}
                 >
                   {/* Two Timeline dots */}
-                  <div className="absolute left-5 top-2 w-4 h-4 bg-white rounded-full border-4 border-red-600 z-10 transform -translate-x-1/2" />
-                  <div className="absolute left-5 top-16 w-4 h-4 bg-white rounded-full border-4 border-red-600 z-10 transform -translate-x-1/2" />
+                  <div className="absolute left-6 sm:left-8 md:left-10 top-2 w-4 h-4 bg-white rounded-full border-4 border-red-600 z-10 transform -translate-x-1/2" />
+                  <div className="absolute left-6 sm:left-8 md:left-10 top-16 w-4 h-4 bg-white rounded-full border-4 border-red-600 z-10 transform -translate-x-1/2" />
 
                   {/* Connecting line (except for last item) */}
                   {index < 5 && (
-                    <div className="absolute left-5 top-2 w-0.5 h-16 bg-red-600 z-0 transform -translate-x-1/2" />
+                    <div className="absolute left-6 sm:left-8 md:left-10 top-2 w-0.5 h-16 bg-red-600 z-0 transform -translate-x-1/2" />
                   )}
 
                   {/* Card */}
-                  <div className="ml-12 flex-1 pt-4 px-4 pb-6 bg-white shadow-md border border-gray-200 rounded-xl">
+                  <div className="ml-12 sm:ml-14 md:ml-16 flex-1 pt-4 px-4 pb-6 bg-white shadow-md border border-gray-200 rounded-xl">
                     <div className="flex items-start gap-3">
                       <item.icon className="w-8 h-8 text-red-600 flex-shrink-0" />
                       <div className="flex flex-col gap-1">
