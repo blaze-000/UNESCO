@@ -9,98 +9,200 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { modules } from "@/data/courseData";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import {
+  BookOpenCheck,
+  CheckCircle,
+  CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
+  FileText,
+  Play,
+  X,
+} from "lucide-react";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-export default function Sidebar({ moduleId }: { moduleId: string }) {
+interface SidebarProps {
+  onClose?: () => void;
+}
+
+export default function Sidebar({ onClose }: SidebarProps) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [openModule, setOpenModule] = useState<string | undefined>(undefined);
+
+  // 🔥 Sync open accordion with active path
+  useEffect(() => {
+    if (!pathname) return;
+    const parts = pathname.split("/"); // e.g. /course/moduleId/itemId
+    const moduleId = parts[2];
+    if (moduleId) {
+      setOpenModule(moduleId);
+    }
+  }, [pathname]);
+
+  const getItemIcon = (type: string) => {
+    switch (type) {
+      case "video":
+        return <Play className="w-5 h-5 text-red-500" />;
+      case "text":
+        return <FileText className="w-5 h-5 text-blue-500" />;
+      case "exercise":
+        return <BookOpenCheck className="w-5 h-5 text-orange-500" />;
+      case "quiz":
+        return <CheckCircle2 className="w-5 h-5 text-orange-500" />;
+      case "audio":
+        return <CheckCircle className="w-5 h-5 text-green-500" />;
+      default:
+        return <FileText className="w-5 h-5 text-gray-500" />;
+    }
+  };
 
   return (
-    <div
-      className={`${
-        collapsed ? "w-18 border-r h-full" : "w-80 h-full"
-      } flex flex-col border-r `}
+    <motion.div
+      initial={{ width: collapsed ? 72 : 320 }}
+      animate={{ width: collapsed ? 72 : 320 }} // w-18 vs w-80
+      transition={{ duration: 0.25, ease: "easeInOut" }}
+      className="flex flex-col border-r h-full bg-white w-80 md:w-auto"
     >
       {/* Header row */}
-      <div className="flex bg-white items-center justify-between px-4 py-3 border-b sticky top-0 ">
-        {!collapsed && (
-          <h2 className="text-lg text-red-500 font-bold">View Courses</h2>
-        )}
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="flex items-center justify-center w-10 h-10 rounded hover:bg-gray-100"
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          {collapsed ? (
-            <ChevronRight className="w-6 h-6" />
-          ) : (
-            <ChevronLeft className="w-6 h-6" />
+      <div className="flex bg-white items-center justify-between px-4 py-3 border-b sticky top-0">
+        <AnimatePresence>
+          {!collapsed && (
+            <motion.h2
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              transition={{ duration: 0.2 }}
+              className="text-lg text-red-500 font-bold"
+            >
+              Course Modules
+            </motion.h2>
           )}
-        </button>
+        </AnimatePresence>
+
+        <div className="flex items-center gap-2">
+          {/* Mobile Close Button */}
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded hover:bg-gray-100"
+              aria-label="Close sidebar"
+            >
+              <X className="w-6 h-6" />
+            </button>
+          )}
+
+          {/* Desktop Collapse Button */}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="hidden md:flex items-center justify-center w-10 h-10 rounded hover:bg-gray-100"
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {collapsed ? (
+              <ChevronRight className="w-6 h-6" />
+            ) : (
+              <ChevronLeft className="w-6 h-6" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Sidebar content */}
       <div className="flex-1 overflow-y-auto">
-        {!collapsed ? (
-          <Accordion type="multiple" className="w-full">
+        {!collapsed || onClose ? (
+          <Accordion
+            type="single"
+            className="w-full"
+            value={openModule}
+            onValueChange={setOpenModule}
+            collapsible
+          >
             {modules.map((module, index) => (
               <AccordionItem key={module.id} value={module.id}>
                 <AccordionTrigger className="text-sm font-medium px-4 border-b cursor-pointer hover:no-underline hover:bg-red-50">
-                  <div className="flex flex-col text-left">
-                    <span className="text-muted-foreground text-xs">{`Module ${
-                      index + 1
-                    }:`}</span>
-                    <span className="font-medium text-sm">{module.title}</span>
+                  <div className="flex items-center space-x-2 text-left">
+                    <motion.div
+                      layoutId={`module-circle-${module.id}`}
+                      className="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-600 font-semibold text-sm mt-1"
+                    >
+                      {index + 1}
+                    </motion.div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-sm text-gray-900 mb-1">
+                        {module.title}
+                      </h3>
+                      <div className="flex items-center space-x-4 text-xs text-gray-500">
+                        <span>{module.items.length} items</span>
+                      </div>
+                    </div>
                   </div>
                 </AccordionTrigger>
 
                 <AccordionContent>
-                  <ul>
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      hidden: { opacity: 0, y: 5 },
+                      visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: { staggerChildren: 0.05 },
+                      },
+                    }}
+                  >
                     {module.items.map((item) => {
                       const href = `/course/${module.id}/${item.id}`;
                       const isActive = pathname === href;
 
                       return (
-                        <li key={item.id}>
-                          <Link
-                            href={href}
-                            className={`block px-3 py-3 text-sm transition-colors ${
-                              isActive ? "bg-red-50" : "hover:bg-red-50"
-                            }`}
-                          >
-                            <div className="flex items-center">
-                              {/* Dot */}
-                              <span className="w-4 h-4 bg-gray-300 rounded-full mt-1 mr-2 flex-shrink-0"></span>
-
-                              {/* Text */}
-                              <div className="flex flex-col leading-tight">
-                                <span
-                                  className={`${
-                                    isActive ? "font-semibold" : "font-normal"
-                                  }`}
-                                >
-                                  {item.title}
-                                </span>
-                                <span className="text-sm font-normal capitalize text-muted-foreground">
-                                  {item.type === "quiz" ? "Practice Assignment" : item.type}
-                                </span>
+                        <motion.div
+                          key={item.id}
+                          variants={{
+                            hidden: { opacity: 0, x: -10 },
+                            visible: { opacity: 1, x: 0 },
+                          }}
+                        >
+                          <Link href={href} onClick={onClose}>
+                            <motion.button
+                              whileHover={{ scale: 1.01, x: 3 }}
+                              whileTap={{ scale: 0.98 }}
+                              className={`flex gap-3 w-full items-center px-4 py-3 text-sm text-left cursor-pointer transition-colors ${
+                                isActive ? "bg-red-50 " : "hover:bg-red-50"
+                              }`}
+                            >
+                              {getItemIcon(item.type)}
+                              <div className="flex-1">
+                                <div className="flex flex-col">
+                                  <span
+                                    className={`${
+                                      isActive ? "font-semibold" : "font-normal"
+                                    }`}
+                                  >
+                                    {item.title}
+                                  </span>
+                                  <span className="text-sm font-normal capitalize text-muted-foreground">
+                                    {item.type === "quiz"
+                                      ? "Practice Assignment"
+                                      : item.type}
+                                  </span>
+                                </div>
                               </div>
-                            </div>
+                            </motion.button>
                           </Link>
-                        </li>
+                        </motion.div>
                       );
                     })}
-                  </ul>
+                  </motion.div>
                 </AccordionContent>
               </AccordionItem>
             ))}
           </Accordion>
         ) : (
-          <div className=""></div>
+          <div />
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }

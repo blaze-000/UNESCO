@@ -1,5 +1,17 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Environment Variables
+
+This project uses environment variables for configuration. Copy the `.env.example` file to `.env` and update the values as needed:
+
+```bash
+cp .env.example .env
+```
+
+### Available Environment Variables
+
+- `NEXT_PUBLIC_BACKEND_URL`: The URL of the backend API server (default: http://127.0.0.1:8000)
+
 ## Getting Started
 
 First, run the development server:

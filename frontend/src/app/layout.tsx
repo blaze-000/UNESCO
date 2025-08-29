@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Merriweather, Open_Sans } from "next/font/google";
+import TopLoader from "nextjs-toploader";
 import "./globals.css";
 import Header from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,14 +19,16 @@ const geistMono = Geist_Mono({
 
 const merriweather = Merriweather({
   subsets: ["latin"],
-  weight: ["400", "700"], // normal + bold
-  variable: "--font-merriweather",
+  weight: ["400", "600", "700"], // normal + bold
+  variable: "--merriweather",
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["400", "600"], // regular + semi-bold
-  variable: "--font-open-sans",
+  variable: "--open-sans",
 });
 
 export const metadata: Metadata = {
@@ -38,10 +44,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased ${merriweather.variable} ${openSans.variable}`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${merriweather.variable} ${openSans.variable} font-merriweather min-h-screen flex flex-col`}
       >
+        <SpeedInsights />
+        <Analytics />
+        <TopLoader showSpinner={false} color="#a06d06" height={1.9} />
         <Header />
-        <main> {children}</main>
+        <main className="flex-1 pt-0">{children}</main>
+        <Footer />
       </body>
     </html>
   );
