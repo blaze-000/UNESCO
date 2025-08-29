@@ -113,3 +113,6 @@ def cleanup_sessions():
     for session_id in sessions_to_remove:
         if session_id in active_sessions:
             del active_sessions[session_id]
+
+if __name__ == "__main__":
+    app.run(debug=False)
