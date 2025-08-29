@@ -30,18 +30,16 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-red-500 rounded-lg flex items-center justify-center">
+            <Link href="/" className="flex items-center  gap-2">
+              <div className="w-64 h-64  rounded-lg flex items-center justify-center">
                 <Image
                   src="/images/logo.png"
                   alt="logo"
-                  width={64}
-                  height={64}
+                  width={164}
+                  height={164}
                 />
               </div>
-              <span className="font-bold text-lg text-gray-900">
-                Beyond the Ads
-              </span>
+             
             </Link>
 
             {/* Desktop Nav Links */}
