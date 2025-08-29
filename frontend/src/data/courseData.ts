@@ -13,7 +13,7 @@ export const modules = [
         duration: "18 min",
         src: {
           english: "https://www.youtube.com/embed/YOUR_ENGLISH_VIDEO_ID",
-          nepali: "https://www.youtube.com/embed/YOUR_NEPALI_VIDEO_ID",
+          hindi: "https://www.youtube.com/embed/YOUR_hindi_VIDEO_ID",
         },
       },
       {
@@ -251,7 +251,7 @@ export const modules = [
         duration: "12 min",
         src: {
           english: "https://www.youtube.com/embed/YOUR_ENGLISH_VIDEO_ID_2",
-          nepali: "https://www.youtube.com/embed/YOUR_NEPALI_VIDEO_ID_2",
+          hindi: "https://www.youtube.com/embed/YOUR_hindi_VIDEO_ID_2",
         },
       },
       {
@@ -534,8 +534,9 @@ export const modules = [
         duration: "16 min",
         src: {
           english: "https://www.youtube.com/embed/pDwdcfx4CWo",
-          nepali: "https://www.youtube.com/embed/ZPS0vQrkT30",
+          hindi: "https://www.youtube.com/embed/ZPS0vQrkT30",
         },
+        transcript: "/data/module-3/transcript-3-1.json",
       },
       {
         id: "audio-3-1",
@@ -897,7 +898,7 @@ export const modules = [
         duration: "25 min",
         src: {
           english: "https://www.youtube.com/embed/RgD3xWRV7oY",
-          nepali: "https://www.youtube.com/embed/-HZK1yYfX-M",
+          hindi: "https://www.youtube.com/embed/-HZK1yYfX-M",
         },
       },
       {
@@ -987,7 +988,7 @@ export const modules = [
           },
         ],
       },
-      
+
       {
         id: "exercise-4",
         type: "exercise",
@@ -1089,7 +1090,7 @@ export const modules = [
         duration: "25 min",
         src: {
           english: "https://www.youtube.com/embed/VOy72oAyoRo",
-          nepali: "https://www.youtube.com/embed/FYdJAysdQro",
+          hindi: "https://www.youtube.com/embed/FYdJAysdQro",
         },
       },
       {

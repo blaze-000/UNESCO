@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Merriweather, Open_Sans } from "next/font/google";
 import TopLoader from "nextjs-toploader";
 import "./globals.css";
 import Header from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,7 +21,6 @@ const merriweather = Merriweather({
   variable: "--merriweather",
   style: ["normal", "italic"],
   display: "swap",
-
 });
 
 const openSans = Open_Sans({
@@ -42,11 +42,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased ${merriweather.variable} ${openSans.variable} font-merriweather`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${merriweather.variable} ${openSans.variable} font-merriweather min-h-screen flex flex-col`}
       >
-       <TopLoader showSpinner={false} color="#a06d06" height={1.9} /> 
+        <TopLoader showSpinner={false} color="#a06d06" height={1.9} />
         <Header />
-        <main> {children}</main>
+        <main className="flex-1 pt-0">{children}</main>
+        <Footer />
       </body>
     </html>
   );

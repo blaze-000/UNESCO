@@ -80,16 +80,16 @@ export default function CoursePage() {
                 value={module.id}
                 className="bg-white border border-gray-200 rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden"
               >
-                <AccordionTrigger className="px-6 py-6 cursor-pointer hover:no-underline">
+                <AccordionTrigger className="px-4 py-4 cursor-pointer hover:no-underline">
                   <div className="flex items-center space-x-4 text-left">
                     <div className="w-10 h-10 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-md">
                       {index + 1}
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-bold text-xl text-gray-900 mb-3">
+                      <h3 className="font-bold text-lg text-gray-900 mb-3">
                         {module.title}
                       </h3>
-                      <p className="text-gray-600 font-normal text-base mb-3 leading-relaxed">
+                      <p className="text-gray-600 font-normal text-sm mb-3 leading-relaxed">
                         {module.description}
                       </p>
                       <div className="flex items-center space-x-6 text-sm text-gray-500">
@@ -105,7 +105,7 @@ export default function CoursePage() {
                     </div>
                   </div>
                 </AccordionTrigger>
-                <AccordionContent className="px-6 pb-6">
+                <AccordionContent className="px-6 pb-4">
                   <div className="space-y-3">
                     {module.items.map((item) => (
                       <motion.div key={item.id}>
@@ -117,7 +117,7 @@ export default function CoursePage() {
                           >
                             {getItemIcon(item.type)}
                             <div className="flex-1">
-                              <p className="font-semibold text-gray-900 group-hover:text-red-600 transition-colors text-base">
+                              <p className="font-semibold text-gray-900 group-hover:text-red-600 transition-colors text-sm">
                                 {item.title}
                               </p>
                               <p className="text-sm text-gray-500 mt-1">

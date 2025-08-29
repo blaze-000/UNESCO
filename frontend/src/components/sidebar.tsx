@@ -17,11 +17,16 @@ import {
   ChevronRight,
   FileText,
   Play,
+  X,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function Sidebar() {
+interface SidebarProps {
+  onClose?: () => void;
+}
+
+export default function Sidebar({ onClose }: SidebarProps) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
   const [openModule, setOpenModule] = useState<string | undefined>(undefined);
@@ -30,7 +35,7 @@ export default function Sidebar() {
   useEffect(() => {
     if (!pathname) return;
     const parts = pathname.split("/"); // e.g. /course/moduleId/itemId
-    const moduleId = parts[2]; 
+    const moduleId = parts[2];
     if (moduleId) {
       setOpenModule(moduleId);
     }
@@ -42,7 +47,7 @@ export default function Sidebar() {
         return <Play className="w-5 h-5 text-red-500" />;
       case "text":
         return <FileText className="w-5 h-5 text-blue-500" />;
-         case "exercise":
+      case "exercise":
         return <BookOpenCheck className="w-5 h-5 text-orange-500" />;
       case "quiz":
         return <CheckCircle2 className="w-5 h-5 text-orange-500" />;
@@ -58,7 +63,7 @@ export default function Sidebar() {
       initial={{ width: collapsed ? 72 : 320 }}
       animate={{ width: collapsed ? 72 : 320 }} // w-18 vs w-80
       transition={{ duration: 0.25, ease: "easeInOut" }}
-      className="flex flex-col border-r h-full"
+      className="flex flex-col border-r h-full bg-white w-80 md:w-auto"
     >
       {/* Header row */}
       <div className="flex bg-white items-center justify-between px-4 py-3 border-b sticky top-0">
@@ -76,22 +81,36 @@ export default function Sidebar() {
           )}
         </AnimatePresence>
 
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="flex items-center justify-center w-10 h-10 rounded hover:bg-gray-100"
-          aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
-        >
-          {collapsed ? (
-            <ChevronRight className="w-6 h-6" />
-          ) : (
-            <ChevronLeft className="w-6 h-6" />
+        <div className="flex items-center gap-2">
+          {/* Mobile Close Button */}
+          {onClose && (
+            <button
+              onClick={onClose}
+              className="md:hidden flex items-center justify-center w-10 h-10 rounded hover:bg-gray-100"
+              aria-label="Close sidebar"
+            >
+              <X className="w-6 h-6" />
+            </button>
           )}
-        </button>
+
+          {/* Desktop Collapse Button */}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="hidden md:flex items-center justify-center w-10 h-10 rounded hover:bg-gray-100"
+            aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+          >
+            {collapsed ? (
+              <ChevronRight className="w-6 h-6" />
+            ) : (
+              <ChevronLeft className="w-6 h-6" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Sidebar content */}
       <div className="flex-1 overflow-y-auto">
-        {!collapsed ? (
+        {!collapsed || onClose ? (
           <Accordion
             type="single"
             className="w-full"
@@ -145,7 +164,7 @@ export default function Sidebar() {
                             visible: { opacity: 1, x: 0 },
                           }}
                         >
-                          <Link href={href}>
+                          <Link href={href} onClick={onClose}>
                             <motion.button
                               whileHover={{ scale: 1.01, x: 3 }}
                               whileTap={{ scale: 0.98 }}
@@ -158,9 +177,7 @@ export default function Sidebar() {
                                 <div className="flex flex-col">
                                   <span
                                     className={`${
-                                      isActive
-                                        ? "font-semibold"
-                                        : "font-normal"
+                                      isActive ? "font-semibold" : "font-normal"
                                     }`}
                                   >
                                     {item.title}

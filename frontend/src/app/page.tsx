@@ -16,7 +16,6 @@ import { useRef } from "react";
 
 export default function HomePage() {
   const timelineRef = useRef(null);
-  
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -34,13 +33,13 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="flex flex-col bg-white">
       {/* Hero Section */}
       <section className="relative flex items-center justify-center px-4 sm:px-6 lg:px-8 py-16 md:py-24 bg-white">
-        <div className="relative flex flex-col lg:flex-row w-full max-w-7xl items-center justify-between gap-8 lg:gap-12">
+        <div className="relative flex flex-col lg:flex-row w-full max-w-7xl items-center justify-between gap-6 lg:gap-12">
           {/* Image Stack */}
           <motion.div
-            className="relative w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px] hover:-ml-20 transition-all duration-300 lg:w-[420px] lg:h-[400px] flex-shrink-0 order-2 lg:order-1"
+            className="relative -ml-16 mb-16 w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px] hover:-ml-20 transition-all duration-300 lg:w-[420px] lg:h-[400px] flex-shrink-0 order-2 lg:order-1"
             initial="rest"
             whileHover="hover"
           >
@@ -151,7 +150,6 @@ export default function HomePage() {
             tactics evolved.
           </motion.div>
 
-        
           {/* Desktop Timeline Visual */}
           <motion.section
             {...fadeInUp}
@@ -198,9 +196,7 @@ export default function HomePage() {
                         </h3>
                       </div>
                     </div>
-                  
                   </div>
-                  
 
                   {/* Circles + connecting line */}
                   <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between items-center px-1">
@@ -208,13 +204,66 @@ export default function HomePage() {
                     <div className="absolute left-4 right-4 top-1/2 -translate-y-1/2 h-0.5 bg-red-600 z-0" />
                     <div className="w-4 h-4  bg-white rounded-full border-4 border-red-600 z-10" />
                   </div>
-                  
                 </motion.div>
-                
               ))}
-              
             </div>
-            
+          </motion.section>
+
+          {/* Mobile Timeline Visual */}
+          <motion.section
+            {...fadeInUp}
+            className="xl:hidden w-full relative bg-gray-50 overflow-hidden py-6"
+          >
+            {/* Vertical timeline line */}
+            <div className="absolute left-11 top-0 bottom-0 w-0.5 bg-gray-300 z-0" />
+
+            {/* Timeline items */}
+            <div className="relative z-10 max-w-2xl mx-auto px-6">
+              {[
+                { year: "2010s", label: "Fake Reviews", icon: Star },
+                { year: "2015", label: "Clickbait Ads", icon: MessageSquare },
+                { year: "2018", label: "Social Media Bots", icon: Bot },
+                {
+                  year: "2021",
+                  label: "Misinformation Campaigns",
+                  icon: ShieldAlert,
+                },
+                { year: "2024+", label: "AI Deepfakes", icon: Video },
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="relative flex items-start mb-8 last:mb-0"
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
+                  viewport={{ once: true, amount: 0.6 }}
+                >
+                  {/* Two Timeline dots */}
+                  <div className="absolute left-5 top-2 w-4 h-4 bg-white rounded-full border-4 border-red-600 z-10 transform -translate-x-1/2" />
+                  <div className="absolute left-5 top-16 w-4 h-4 bg-white rounded-full border-4 border-red-600 z-10 transform -translate-x-1/2" />
+
+                  {/* Connecting line (except for last item) */}
+                  {index < 5 && (
+                    <div className="absolute left-5 top-2 w-0.5 h-16 bg-red-600 z-0 transform -translate-x-1/2" />
+                  )}
+
+                  {/* Card */}
+                  <div className="ml-12 flex-1 pt-4 px-4 pb-6 bg-white shadow-md border border-gray-200 rounded-xl">
+                    <div className="flex items-start gap-3">
+                      <item.icon className="w-8 h-8 text-red-600 flex-shrink-0" />
+                      <div className="flex flex-col gap-1">
+                        <p className="text-base font-medium text-red-600">
+                          {item.year}
+                        </p>
+                        <h3 className="text-sm font-semibold text-gray-900">
+                          {item.label}
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.section>
         </div>
       </motion.section>

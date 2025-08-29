@@ -5,7 +5,8 @@ import TextContent from "@/components/TextContent";
 import VideoPlayer from "@/components/VideoPlayer";
 import AudioPlayer from "@/components/AudioPlayer";
 import { modules } from "@/data/courseData";
-import  Quiz  from "@/components/Quiz";
+import Quiz from "@/components/Quiz";
+import { CourseItem, VideoItem } from "@/types/course";
 
 export default function ItemPage({
   params,
@@ -13,7 +14,7 @@ export default function ItemPage({
   params: Promise<{ moduleId: string; itemId: string }>;
 }) {
   const { moduleId, itemId } = use(params);
-  const item = modules
+  const item: CourseItem | undefined = modules
     .find((m) => m.id === moduleId)
     ?.items.find((i) => i.id === itemId);
 
@@ -35,9 +36,16 @@ export default function ItemPage({
   if (item.type === "text" && loading) return <div>Loading...</div>;
 
   const components = {
-    video: () => <VideoPlayer src={item.src ?? ""} title={item.title} />,
+    video: () => (
+      <VideoPlayer
+        src={(item as VideoItem).src}
+        title={item.title}
+        transcript={(item as VideoItem).transcript}
+      />
+    ),
     text: () => <TextContent htmlContent={htmlContent} />,
-    exercise: () => ( <Quiz
+    exercise: () => (
+      <Quiz
         title={item.title}
         questions={Array.isArray(item.questions) ? item.questions : []}
         moduleId={moduleId}

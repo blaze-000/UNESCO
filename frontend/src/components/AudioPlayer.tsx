@@ -51,7 +51,10 @@ export default function AudioPlayer({
     analyser.fftSize = 256;
 
     // connect existing source
-    sourceRef.current.connect(gainNode).connect(analyser).connect(audioCtx.destination);
+    sourceRef.current
+      .connect(gainNode)
+      .connect(analyser)
+      .connect(audioCtx.destination);
 
     gainNodeRef.current = gainNode;
     analyserRef.current = analyser;
@@ -165,45 +168,46 @@ export default function AudioPlayer({
   const progress = duration ? (currentTime / duration) * 100 : 0;
 
   return (
-    <div className="flex items-center justify-center h-[calc(100vh-8rem)] p-4">
-      <div className="w-full max-w-3xl overflow-hidden bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
-
-        {/* Visualizer - show only when playing */}
-
-          <div className={`mb-6 visualizer ${isPlaying ? "visible" : "hidden"}`}>
-            <canvas
-              ref={canvasRef}
-              width={600}
-              height={100}
-              className="w-full bg-white rounded-lg border border-gray-200"
-            />
-          </div>
-
-
-        {/* Cover + Title */}
-        <div className="flex items-center gap-4 mb-6">
+    <div className="flex items-center justify-center h-full p-4">
+      <div className="w-full max-w-md md:max-w-2xl overflow-hidden bg-white rounded-2xl border border-gray-200 shadow-sm p-4 md:p-6">
+        {/* Cover + Title - Mobile Optimized */}
+        <div className="flex flex-col md:flex-row items-center gap-4 mb-6 text-center md:text-left">
           <Image
             src={coverImage || "/default-cover.jpg"}
             alt={title}
-            className="w-36 h-36 rounded-xl object-cover flex-shrink-0 border border-gray-200"
-            width={96}
-            height={96}
+            className="w-24 h-24 md:w-32 md:h-32 rounded-xl object-cover flex-shrink-0 border border-gray-200 shadow-sm"
+            width={128}
+            height={128}
           />
-          <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-gray-900 text-lg truncate">
+          <div className="flex-1 min-w-0 px-2">
+            <h3 className="font-semibold text-gray-900 text-lg md:text-xl break-words leading-tight">
               {title}
             </h3>
           </div>
         </div>
 
-        {/* Progress Bar */}
-        <div className="mb-6">
+        {/* Visualizer - Mobile Optimized */}
+        <div
+          className={`mb-4 md:mb-6 visualizer ${
+            isPlaying ? "visible" : "hidden"
+          }`}
+        >
+          <canvas
+            ref={canvasRef}
+            width={600}
+            height={80}
+            className="w-full h-20 md:h-24 bg-gradient-to-r from-red-50 to-pink-50 rounded-lg border border-gray-200"
+          />
+        </div>
+
+        {/* Progress Bar - Mobile Optimized */}
+        <div className="mb-4 md:mb-6">
           <div
-            className="h-2 bg-gray-200 rounded-full cursor-pointer"
+            className="h-1.5 md:h-2 bg-gray-200 rounded-full cursor-pointer"
             onClick={handleProgressClick}
           >
             <div
-              className="h-full bg-red-500 rounded-full transition-all duration-200 ease-out"
+              className="h-full bg-gradient-to-r from-red-500 to-red-600 rounded-full transition-all duration-200 ease-out"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -213,45 +217,49 @@ export default function AudioPlayer({
           </div>
         </div>
 
-        {/* Controls */}
-        <div className="flex items-center justify-center gap-8">
+        {/* Controls - Mobile Optimized */}
+        <div className="flex items-center justify-center gap-4 md:gap-8 mb-4">
           <motion.button
             onClick={() => skip(-15)}
-            className="p-3 text-gray-600 hover:text-gray-900 transition-colors"
+            className="p-2 md:p-3 text-gray-600 hover:text-gray-900 transition-colors"
             whileTap={{ rotate: -20, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
           >
-            <RotateCcw size={28} />
+            <RotateCcw size={24} className="md:w-7 md:h-7" />
           </motion.button>
 
           <button
             onClick={togglePlay}
-            className="w-14 h-14 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600 transition-colors"
+            className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full flex items-center justify-center hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-lg hover:shadow-xl"
             disabled={!content}
           >
-            {isPlaying ? <Pause size={28} /> : <Play size={28} className="ml-0.5" />}
+            {isPlaying ? (
+              <Pause size={28} className="md:w-8 md:h-8" />
+            ) : (
+              <Play size={28} className="md:w-8 md:h-8 ml-0.5" />
+            )}
           </button>
 
           <motion.button
             onClick={() => skip(15)}
-            className="p-3 text-gray-600 hover:text-gray-900 transition-colors"
+            className="p-2 md:p-3 text-gray-600 hover:text-gray-900 transition-colors"
             whileTap={{ rotate: 20, scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
           >
-            <RotateCw size={28} />
+            <RotateCw size={24} className="md:w-7 md:h-7" />
           </motion.button>
         </div>
 
-        {/* Playback Speed Control */}
-        <div className="flex justify-center mt-6 gap-3 text-sm">
+        {/* Playback Speed Control - Mobile Optimized */}
+        <div className="flex justify-center gap-2 md:gap-3 text-xs md:text-sm">
           {[0.5, 1, 1.25, 1.5, 2].map((rate) => (
             <button
               key={rate}
               onClick={() => changeSpeed(rate)}
-              className={`px-3 py-1 rounded-lg ${
+              className={`px-2 py-1 md:px-3 md:py-1.5 rounded-lg transition-all duration-200 ${
                 playbackRate === rate
-                  ? "bg-red-500 text-white"
-                  : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                  ? "bg-gradient-to-r from-red-500 to-red-600 text-white shadow-sm"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
               }`}
             >
               {rate}x
