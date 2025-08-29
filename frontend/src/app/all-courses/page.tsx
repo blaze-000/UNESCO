@@ -36,7 +36,21 @@ export default function CoursePage() {
     }
   };
 
-  const getItemMeta = (item: any) => {
+  // Replace 'any' with a more specific type for item
+  type Question = {
+    question: string;
+    options: string[];
+    correctAnswer: string;
+    explanation?: string;
+  };
+  type CourseItem = {
+    id: string;
+    title: string;
+    type: string;
+    duration?: string;
+    questions?: Question[];
+  };
+  const getItemMeta = (item: CourseItem) => {
     if (item.duration) return item.duration;
     if (item.type === "quiz" && item.questions)
       return `${item.questions.length} questions`;
@@ -61,7 +75,7 @@ export default function CoursePage() {
           </p>
           <div className="bg-gray-50 border-l-4 border-red-500 rounded-r-lg p-4 max-w-2xl mx-auto mb-8">
             <p className="text-sm text-gray-700 text-center">
-              <strong>Note:</strong> You don't need to complete all audio,
+              <strong>Note:</strong> You don&rsquo;t need to complete all audio,
               video, and text content. Completing any one of these content types
               will mark the module as complete.
             </p>

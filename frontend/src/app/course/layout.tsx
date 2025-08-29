@@ -2,7 +2,7 @@
 
 import Sidebar from "@/components/sidebar";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 
 export default function ModuleLayout({
   children,
@@ -55,7 +55,7 @@ export default function ModuleLayout({
           <div className="w-10"></div> {/* Spacer for centering */}
         </div>
 
-        <div className="w-full flex-1 overflow-hidden">{children}</div>
+        <div className="w-full flex-1">{children}</div>
       </main>
     </div>
   );

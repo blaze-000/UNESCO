@@ -22,7 +22,8 @@ type Message = {
   timestamp: Date;
 };
 
-const BACKEND_URL = "http://127.0.0.1:8000";
+const BACKEND_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL 
 
 const EXAMPLE_PROMPTS = [
   "Colgate Optic White Renewal is a high-performance whitening toothpaste designed to remove up to 15 years of stains with its 5% hydrogen peroxide formula. It targets deep-set discoloration from coffee, tea, and wine while remaining gentle on enamel. With a refreshing mint flavor and fluoride protection, it not only brightens your smile but also strengthens teeth and fights cavities.",
@@ -80,7 +81,7 @@ export default function ChatsPage(): ReactElement {
   const [isLoading, setIsLoading] = useState(false);
   const [currentProgress, setCurrentProgress] = useState<string | null>(null);
   const [messages, setMessages] = useState<Message[]>([]);
-  const [askedQuestion, setAskedQuestion] = useState<string | null>(null);
+
   const eventSourceRef = useRef<EventSource | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -157,7 +158,7 @@ export default function ChatsPage(): ReactElement {
 
     setIsLoading(true);
     setCurrentProgress(null);
-    setAskedQuestion(text);
+   
     setInputValue("");
     if (textareaRef.current) textareaRef.current.style.height = "auto";
 

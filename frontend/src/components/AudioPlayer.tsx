@@ -230,13 +230,13 @@ export default function AudioPlayer({
 
           <button
             onClick={togglePlay}
-            className="w-16 h-16 md:w-20 md:h-20 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full flex items-center justify-center hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-lg hover:shadow-xl"
+            className="w-12 h-12 md:w-12 md:h-12 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-full flex items-center justify-center hover:from-red-600 hover:to-red-700 transition-all duration-200 shadow-lg hover:shadow-xl"
             disabled={!content}
           >
             {isPlaying ? (
-              <Pause size={28} className="md:w-8 md:h-8" />
+              <Pause size={24} className="md:w-6 md:h-6" />
             ) : (
-              <Play size={28} className="md:w-8 md:h-8 ml-0.5" />
+              <Play size={24} className="md:w-6 md:h-6 ml-0.5" />
             )}
           </button>
 

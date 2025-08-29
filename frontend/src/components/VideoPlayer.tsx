@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { ChevronRight, FileText, Globe } from "lucide-react";
+import {  Globe } from "lucide-react";
 
 interface TranscriptSegment {
   start: number;
@@ -37,25 +37,25 @@ function getCurrentVideoSrc(
   return src[language as keyof typeof src] || src.english;
 }
 
-// Helper function to format time
-function formatTime(seconds: number): string {
-  const mins = Math.floor(seconds / 60);
-  const secs = Math.floor(seconds % 60);
-  return `${mins}:${secs.toString().padStart(2, "0")}`;
-}
 
 export default function VideoPlayer({
   src,
   title,
   transcript,
 }: VideoPlayerProps) {
-  const [collapsed, setCollapsed] = useState(false);
+  
   const [language, setLanguage] = useState("english");
   const [transcriptData, setTranscriptData] = useState<Transcript | null>(null);
-  const [currentTime, setCurrentTime] = useState(0);
+ 
   const [currentSegment, setCurrentSegment] = useState<number | null>(null);
   const iframeRef = useRef<HTMLIFrameElement>(null);
-  const playerRef = useRef<any>(null);
+  interface YTPlayer {
+    destroy: () => void;
+    getCurrentTime: () => number;
+    seekTo: (seconds: number) => void;
+    playVideo: () => void;
+  }
+  const playerRef = useRef<YTPlayer | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   // Check if we have multiple language options
@@ -107,17 +107,17 @@ export default function VideoPlayer({
         if (iframeRef.current) {
           playerRef.current = new window.YT.Player(iframeRef.current, {
             events: {
-              onReady: (event: any) => {
+              onReady: () => {
                 console.log("YouTube player ready");
               },
-              onStateChange: (event: any) => {
+              onStateChange: (event: { data: number }) => {
                 console.log("Player state changed:", event.data);
                 if (event.data === window.YT.PlayerState.PLAYING) {
                   // Start polling for current time
                   intervalRef.current = setInterval(() => {
                     if (playerRef.current && playerRef.current.getCurrentTime) {
                       const time = playerRef.current.getCurrentTime();
-                      setCurrentTime(time);
+                      
 
                       // Find current segment
                       if (transcriptData) {
@@ -161,7 +161,7 @@ export default function VideoPlayer({
 
   // Scroll to current segment
   useEffect(() => {
-    if (currentSegment !== null && !collapsed) {
+    if (currentSegment !== null ) {
       const element = document.getElementById(
         `transcript-segment-${currentSegment}`
       );
@@ -172,7 +172,7 @@ export default function VideoPlayer({
         });
       }
     }
-  }, [currentSegment, collapsed]);
+  }, [currentSegment]);
 
   return (
     <div className="flex w-full h-full overflow-hidden">
