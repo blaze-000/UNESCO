@@ -8,7 +8,7 @@ export default function ModuleLayout({
   children,
 }: {
   children: React.ReactNode;
-  params: { moduleId: string };
+  params: Promise<{ moduleId: string }>;
 }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 

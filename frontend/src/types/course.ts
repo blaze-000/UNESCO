@@ -42,7 +42,19 @@ export interface QuizItem {
   questions: Question[];
 }
 
-export type CourseItem = VideoItem | AudioItem | TextItem | QuizItem;
+export interface ExerciseItem {
+  id: string;
+  type: "exercise";
+  title: string;
+  questions: Question[];
+}
+
+export type CourseItem =
+  | VideoItem
+  | AudioItem
+  | TextItem
+  | QuizItem
+  | ExerciseItem;
 
 export interface Module {
   id: string;

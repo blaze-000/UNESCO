@@ -16,7 +16,7 @@ export default function ItemPage({
   const { moduleId, itemId } = use(params);
   const item: CourseItem | undefined = modules
     .find((m) => m.id === moduleId)
-    ?.items.find((i) => i.id === itemId);
+    ?.items.find((i) => i.id === itemId) as CourseItem | undefined;
 
   const [htmlContent, setHtmlContent] = useState("");
   const [loading, setLoading] = useState(false);
@@ -47,7 +47,7 @@ export default function ItemPage({
     exercise: () => (
       <Quiz
         title={item.title}
-        questions={Array.isArray(item.questions) ? item.questions : []}
+        questions={item.type === "exercise" ? item.questions : []}
         moduleId={moduleId}
         itemId={itemId}
       />
@@ -55,16 +55,16 @@ export default function ItemPage({
     quiz: () => (
       <Quiz
         title={item.title}
-        questions={Array.isArray(item.questions) ? item.questions : []}
+        questions={item.type === "quiz" ? item.questions : []}
         moduleId={moduleId}
         itemId={itemId}
       />
     ),
     audio: () => (
       <AudioPlayer
-        content={item.src ?? ""}
+        content={item.type === "audio" ? item.src : ""}
         title={item.title}
-        coverImage={item.coverImage}
+        coverImage={item.type === "audio" ? item.coverImage : ""}
       />
     ),
   } as const;
