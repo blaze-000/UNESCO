@@ -22,8 +22,7 @@ type Message = {
   timestamp: Date;
 };
 
-const BACKEND_URL =
-  process.env.NEXT_PUBLIC_BACKEND_URL 
+const BACKEND_URL = "https://my-flask-env.eba-j95mzmrr.us-east-1.elasticbeanstalk.com";
 
 const EXAMPLE_PROMPTS = [
   "Colgate Optic White Renewal is a high-performance whitening toothpaste designed to remove up to 15 years of stains with its 5% hydrogen peroxide formula. It targets deep-set discoloration from coffee, tea, and wine while remaining gentle on enamel. With a refreshing mint flavor and fluoride protection, it not only brightens your smile but also strengthens teeth and fights cavities.",
