@@ -12,10 +12,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 export default function HomePage() {
   const timelineRef = useRef(null);
+  const [isImageHovered, setIsImageHovered] = useState(false);
 
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
@@ -42,6 +43,8 @@ export default function HomePage() {
             className="relative -ml-16 mb-16 w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px] hover:-ml-20 transition-all duration-300 lg:w-[420px] lg:h-[400px] flex-shrink-0 order-2 lg:order-1"
             initial="rest"
             whileHover="hover"
+            onMouseEnter={() => setIsImageHovered(true)}
+            onMouseLeave={() => setIsImageHovered(false)}
           >
             {images.map((src, i) => (
               <motion.div
@@ -49,7 +52,7 @@ export default function HomePage() {
                 className="absolute top-0 left-0 w-full h-full rounded-lg overflow-hidden shadow-sm border border-gray-100 "
                 variants={{
                   rest: { x: i * 15, y: i * 15, scale: 1 },
-                  hover: { x: i * 250, y: 0, scale: 1 },
+                  hover: { x: i * 200, y: 0, scale: 1 },
                 }}
                 transition={{
                   type: "spring",
@@ -69,25 +72,27 @@ export default function HomePage() {
           </motion.div>
 
           {/* Hero Text */}
-          <div className="flex-1 max-w-xl text-center lg:text-left order-1 lg:order-2">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
-              Youth Leading the Way
-            </h1>
-            <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed">
-              Join the UNESCO Youth Hackathon 2025 and build Media & Information
-              Literacy solutions that impact communities worldwide.
-            </p>
-            <Button
-              asChild
-              className="bg-red-600 hover:bg-red-700 text-white px-6 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group"
-              size="lg"
-            >
-              <Link href="/all-courses">
-                Start Course
-                <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </Button>
-          </div>
+          {!isImageHovered && (
+            <div className="flex-1 max-w-xl text-center lg:text-left order-1 lg:order-2">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 md:mb-6">
+                Youth Leading the Way
+              </h1>
+              <p className="text-base md:text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed">
+                Join the UNESCO Youth Hackathon 2025 and build Media & Information
+                Literacy solutions that impact communities worldwide.
+              </p>
+              <Button
+                asChild
+                className="bg-red-600 hover:bg-red-700 text-white px-6 md:px-8 py-4 md:py-6 text-base md:text-lg rounded-lg shadow-sm hover:shadow-md transition-all duration-300 group"
+                size="lg"
+              >
+                <Link href="/all-courses">
+                  Start Course
+                  <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </Button>
+            </div>
+          )}
         </div>
       </section>
 

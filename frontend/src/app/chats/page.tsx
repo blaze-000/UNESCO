@@ -22,7 +22,7 @@ type Message = {
   timestamp: Date;
 };
 
-const BACKEND_URL = "";
+const BACKEND_URL = "https://rishi-kesh-00-luma.hf.space/";
 
 const EXAMPLE_PROMPTS = [
   "Colgate Optic White Renewal is a high-performance whitening toothpaste designed to remove up to 15 years of stains with its 5% hydrogen peroxide formula. It targets deep-set discoloration from coffee, tea, and wine while remaining gentle on enamel. With a refreshing mint flavor and fluoride protection, it not only brightens your smile but also strengthens teeth and fights cavities.",
@@ -289,7 +289,7 @@ export default function ChatsPage(): ReactElement {
                     {...props}
                   />
                 ),
-                th: ({  ...props }) => (
+                th: ({...props }) => (
                   <th
                     className="border border-gray-300 px-3 py-2 bg-gray-100 font-semibold text-left"
                     {...props}
