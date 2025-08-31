@@ -76,9 +76,9 @@ export default function CoursePage() {
           </p>
           <div className="bg-gray-50 border-l-4 border-red-500 rounded-r-lg p-4 max-w-2xl mx-auto mb-8">
             <p className="text-sm text-gray-700 text-center">
-              <strong>Note:</strong> You don&rsquo;t need to complete all audio,
+              <strong>Note:</strong> <span className="italic">You don&rsquo;t need to complete all audio,
               video, and text content. Completing any one of these content types
-              will mark the module as complete.
+              will mark the module as complete.</span>
             </p>
           </div>
         </motion.div>
