@@ -48,7 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased ${merriweather.variable} ${openSans.variable} font-merriweather min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased ${merriweather.variable} ${openSans.variable} font-merriweather `}
       >
         <SpeedInsights />
         <Analytics />
