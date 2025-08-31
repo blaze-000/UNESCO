@@ -12,8 +12,8 @@ export const modules = [
         title: "Source Credibility Framework",
         duration: "18 min",
         src: {
-          english: "https://youtu.be/23pYQLPEbCI",
-          hindi: "https://www.youtube.com/embed/YOUR_hindi_VIDEO_ID",
+          english: "https://youtube.com/embed/23pYQLPEbCI",
+        
         },
       },
       {
@@ -250,8 +250,7 @@ export const modules = [
         title: "What is Media Literacy?",
         duration: "12 min",
         src: {
-          english: "https://www.youtube.com/embed/YOUR_ENGLISH_VIDEO_ID_2",
-          hindi: "https://www.youtube.com/embed/YOUR_hindi_VIDEO_ID_2",
+          english: "https://youtube.com/embed/l-0JnwDqiNU",
         },
       },
       {

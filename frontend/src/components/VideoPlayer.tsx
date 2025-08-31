@@ -207,7 +207,7 @@ export default function VideoPlayer({
               ref={iframeRef}
               src={`${currentSrc}?rel=0&modestbranding=1&showinfo=0&iv_load_policy=3`}
               title={title || "YouTube video"}
-              className="w-full max-w-4xl mx-auto h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] bg-black rounded-lg shadow-md"
+              className="w-full aspect-video max-w-3xl mx-auto rounded-lg "
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -217,7 +217,7 @@ export default function VideoPlayer({
               key={`${currentSrc}-${language}`}
               src={currentSrc}
               controls
-              className="w-full h-[250px] sm:h-[300px] md:h-[400px] lg:h-[500px] bg-black rounded-lg shadow-md"
+              className="w-full aspect-video bg-white rounded-lg"
             />
           );
         })()}
