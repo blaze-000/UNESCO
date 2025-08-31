@@ -22,7 +22,7 @@ type Message = {
   timestamp: Date;
 };
 
-const BACKEND_URL = "https://rishi-kesh-00-luma.hf.space/";
+const BACKEND_URL = "";
 
 const EXAMPLE_PROMPTS = [
   "Colgate Optic White Renewal is a high-performance whitening toothpaste designed to remove up to 15 years of stains with its 5% hydrogen peroxide formula. It targets deep-set discoloration from coffee, tea, and wine while remaining gentle on enamel. With a refreshing mint flavor and fluoride protection, it not only brightens your smile but also strengthens teeth and fights cavities.",
@@ -268,27 +268,56 @@ export default function ChatsPage(): ReactElement {
         );
 
       case "assistant":
-        return (
-          <motion.div
-            key={message.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-left"
-          >
-            <div className="inline-block max-w-full sm:max-w-3xl">
-              <div className="bg-white rounded-2xl px-3 sm:px-4 py-2 sm:py-3">
-                <div className="text-gray-700 leading-relaxed prose prose-sm max-w-none">
-                  <ReactMarkdown
-                    remarkPlugins={[remarkGfm]}
-                    rehypePlugins={[rehypeRaw]}
-                  >
-                    {message.content}
-                  </ReactMarkdown>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        );
+  return (
+    <motion.div
+      key={message.id}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="text-left"
+    >
+      <div className="inline-block max-w-full sm:max-w-3xl">
+        <div className="bg-white rounded-2xl px-3 sm:px-4 py-2 sm:py-3">
+          {/* Markdown wrapper with custom styles */}
+          <div className="markdown-body text-gray-700 leading-relaxed max-w-none text-sm sm:text-base">
+            <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
+              rehypePlugins={[rehypeRaw]}
+              components={{
+                table: ({  ...props }) => (
+                  <table
+                    className="w-full border-collapse border border-gray-300 my-3 text-sm sm:text-base"
+                    {...props}
+                  />
+                ),
+                th: ({  ...props }) => (
+                  <th
+                    className="border border-gray-300 px-3 py-2 bg-gray-100 font-semibold text-left"
+                    {...props}
+                  />
+                ),
+                td: ({  ...props }) => (
+                  <td
+                    className="border border-gray-300 px-3 py-2"
+                    {...props}
+                  />
+                ),
+                ul: ({  ...props }) => (
+                  <ul className="list-disc list-inside space-y-1 ml-2" {...props} />
+                ),
+                ol: ({ ...props }) => (
+                  <ol className="list-decimal list-inside space-y-1 ml-2" {...props} />
+                ),
+               
+              }}
+            >
+              {message.content}
+            </ReactMarkdown>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+
 
       case "error":
         return (
