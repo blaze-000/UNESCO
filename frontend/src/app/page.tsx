@@ -140,7 +140,7 @@ export default function HomePage() {
             transition={{ delay: 0.3 }}
             className="text-sm sm:text-base text-center text-gray-600 max-w-3xl mx-auto mb-8 sm:mb-12 px-2 sm:px-0"
           >
-            From spam emails to AI-powered deepfakes — here's how deceptive tactics evolved.
+            From spam emails to AI-powered deepfakes — here&rsquo;s how deceptive tactics evolved.
           </motion.div>
 
           {/* Desktop Timeline Visual */}
