@@ -9,7 +9,7 @@ export const modules = [
       {
         id: "video-1-1",
         type: "video",
-        title: "Source Credibility Framework",
+        title: "Why Deceptive Marketing Matters?",
         duration: "18 min",
         src: {
           english: "https://youtube.com/embed/23pYQLPEbCI",
@@ -247,7 +247,7 @@ export const modules = [
       {
         id: "video-2-1",
         type: "video",
-        title: "What is Media Literacy?",
+        title: "The Core tactics of Deceptive Marketing",
         duration: "12 min",
         src: {
           english: "https://youtube.com/embed/l-0JnwDqiNU",
@@ -521,7 +521,7 @@ export const modules = [
   },
   {
     id: "module-3",
-    title: "How Deceptive Marketing Differs Across the Globe",
+    title: "How Deceptive Marketing Differs Across the Globe?",
     description:
       "Discover how deceptive marketing adapts to different cultures, targeting local values and beliefs while maintaining the same underlying manipulation tactics worldwide",
     duration: "50 min",
@@ -529,7 +529,7 @@ export const modules = [
       {
         id: "video-3-1",
         type: "video",
-        title: "Digital Rights and Responsibilities",
+        title: "How Deceptive Marketing Differs Across the Globe?",
         duration: "16 min",
         src: {
           english: "https://www.youtube.com/embed/pDwdcfx4CWo",
@@ -893,7 +893,7 @@ export const modules = [
       {
         id: "video-4-1",
         type: "video",
-        title: "Design Thinking for MIL Solutions",
+        title: "Toolkit for Being Safe from Deceptive Marketing",
         duration: "25 min",
         src: {
           english: "https://www.youtube.com/embed/RgD3xWRV7oY",
@@ -1085,7 +1085,7 @@ export const modules = [
       {
         id: "video-5-1",
         type: "video",
-        title: "Design Thinking for MIL Solutions",
+        title: "Becoming a Global Ad Detective",
         duration: "25 min",
         src: {
           english: "https://www.youtube.com/embed/VOy72oAyoRo",
