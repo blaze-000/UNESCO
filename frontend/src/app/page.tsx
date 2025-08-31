@@ -40,7 +40,7 @@ export default function HomePage() {
         <div className="relative flex flex-col lg:flex-row w-full max-w-7xl items-center justify-between gap-6 lg:gap-12">
           {/* Image Stack */}
           <motion.div
-            className="relative -ml-16 mb-16 w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px] hover:-ml-20 transition-all duration-300 lg:w-[420px] lg:h-[400px] flex-shrink-0 order-2 lg:order-1"
+            className="relative  mb-16 w-[240px] h-[240px] sm:w-[300px] sm:h-[300px] md:w-[360px] md:h-[360px]  transition-all duration-300 lg:w-[360px] lg:h-[360px] flex-shrink-0 order-2 lg:order-1"
             initial="rest"
             whileHover="hover"
             onMouseEnter={() => setIsImageHovered(true)}
