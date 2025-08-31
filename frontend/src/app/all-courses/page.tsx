@@ -54,6 +54,7 @@ export default function CoursePage() {
     if (item.duration) return item.duration;
     if (item.type === "quiz" && item.questions)
       return `${item.questions.length} questions`;
+    if (item.type === "exercise") return "Exercise";
     return "";
   };
 
