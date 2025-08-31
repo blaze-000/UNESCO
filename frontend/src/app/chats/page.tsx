@@ -375,7 +375,7 @@ export default function ChatsPage(): ReactElement {
                     <motion.button
                       key={index}
                       onClick={() => handleExampleClick(prompt)}
-                      className="block w-full cursor-pointer text-left p-3 sm:p-4 md:p-5 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 transition text-sm md:text-base"
+                      className="block w-full cursor-pointer text-left p-3 sm:p-4 md:p-5 bg-gray-50 hover:bg-gray-100 rounded-xl border border-gray-200 transition text-sm"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
