@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   title: "Beyond the Ads",
   description: "Explore the impact of deceptive advertising and misinformation.",
   icons: {
-    icon: "/images/favicon.png",
+    icon: "/images/favicon.ico",
     
   },
 };

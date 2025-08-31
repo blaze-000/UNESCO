@@ -12,7 +12,7 @@ export const modules = [
         title: "Source Credibility Framework",
         duration: "18 min",
         src: {
-          english: "https://www.youtube.com/embed/YOUR_ENGLISH_VIDEO_ID",
+          english: "https://youtu.be/23pYQLPEbCI",
           hindi: "https://www.youtube.com/embed/YOUR_hindi_VIDEO_ID",
         },
       },
